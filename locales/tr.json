@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "features": "Özellikler",
+    "pricing": "Fiyatlandırma",
+    "faq": "SSS",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "signIn": "Giriş Yap",
+    "getStarted": "Başlayın"
+  },
+  "hero": {
+    "subtitle": "Yolculuğunuza Bugün Başlayın",
+    "title": "Kur'an'ı Öğrenin",
+    "titleHighlight": "Uzman Öğretmenlerle",
+    "description": "Sertifikalı alimlerden kişiselleştirilmiş bire bir derslerle evinizin konforunda Kur'an okuma, Tecvid ve Arapça öğrenin.",
+    "ctaPrimary": "Ücretsiz Öğrenmeye Başla",
+    "ctaSecondary": "Kursları Keşfet"
+  },
+  "features": {
+    "title": "Neden Quran Academy?",
+    "subtitle": "Platformumuz geleneksel İslami ilim ile modern öğrenme teknolojisini birleştirir.",
+    "items": [
+      {
+        "icon": "🎓",
+        "title": "Sertifikalı Öğretmenler",
+        "description": "İcazet sertifikasına sahip ve yıllarca öğretim deneyimi olan alimlerden öğrenin."
+      },
+      {
+        "icon": "🕐",
+        "title": "Esnek Program",
+        "description": "Yaşam tarzınıza uygun dersler rezerve edin, tüm saat dilimlerinde 7/24 mevcut."
+      },
+      {
+        "icon": "📱",
+        "title": "Her Yerde Öğrenin",
+        "description": "Derslere herhangi bir cihazdan erişin - masaüstü, tablet veya mobil."
+      },
+      {
+        "icon": "📊",
+        "title": "İlerlemeyi Takip Edin",
+        "description": "Detaylı ilerleme raporları ve kilometre taşları ile öğrenme yolculuğunuzu izleyin."
+      },
+      {
+        "icon": "👨‍👩‍👧‍👦",
+        "title": "Aile Planları",
+        "description": "Birlikte öğrenen aileler için özel fiyatlandırma ve paylaşılan paneller."
+      },
+      {
+        "icon": "🏆",
+        "title": "Sertifikasyon",
+        "description": "Her kurs seviyesini tamamladığınızda tanınmış sertifikalar kazanın."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Basit, Şeffaf Fiyatlandırma",
+    "subtitle": "Öğrenme hedeflerinize uygun planı seçin. Tüm planlar 7 günlük ücretsiz deneme içerir.",
+    "mostPopular": "EN POPÜLER",
+    "perMonth": "/ay",
+    "startTrial": "Ücretsiz Denemeyi Başlat",
+    "plans": [
+      {
+        "name": "Başlangıç",
+        "description": "Yeni başlayanlar için mükemmel",
+        "price": 29,
+        "features": [
+          "Haftada 2 canlı ders",
+          "Temel Kur'an okuma",
+          "İlerleme takibi",
+          "E-posta desteği"
+        ]
+      },
+      {
+        "name": "Profesyonel",
+        "description": "En popüler seçim",
+        "price": 59,
+        "features": [
+          "Haftada 5 canlı ders",
+          "Tecvid ustalığı",
+          "Ezber programı",
+          "Öncelikli destek",
+          "Bire bir mentorluk"
+        ]
+      },
+      {
+        "name": "Alim",
+        "description": "Ciddi öğrenciler için",
+        "price": 99,
+        "features": [
+          "Sınırsız ders",
+          "İleri düzey Arapça",
+          "Tefsir çalışmaları",
+          "İcazet hazırlığı",
+          "Özel öğretmen"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "title": "Sık Sorulan Sorular",
+    "subtitle": "Quran Academy ile öğrenme hakkında bilmeniz gereken her şey.",
+    "items": [
+      {
+        "question": "Online Kur'an öğrenimi nasıl çalışır?",
+        "answer": "Platformumuz sizi canlı video oturumları aracılığıyla sertifikalı öğretmenlerle buluşturur. Sınıfları kendi uygunluğunuza göre planlayabilir ve kişiselleştirilmiş ilgiyle kendi hızınızda öğrenebilirsiniz."
+      },
+      {
+        "question": "Başlamak için önceden bilgi gerekli mi?",
+        "answer": "Hiç değil! Tamamen yeni başlayanları memnuniyetle karşılıyoruz. Müfredatımız Arap harflerinin temellerinden başlar ve kademeli olarak akıcı Kur'an okumaya ilerler."
+      },
+      {
+        "question": "Tecvid nedir ve neden önemlidir?",
+        "answer": "Tecvid, Kur'an'ın doğru telaffuzunu yöneten kurallar bütünüdür. Kur'an'ın vahyedildiği gibi okunmasını sağlar, güzelliğini ve anlamını korur."
+      },
+      {
+        "question": "Aboneliğimi iptal edebilir veya değiştirebilir miyim?",
+        "answer": "Evet, aboneliğinizi istediğiniz zaman iptal edebilir veya değiştirebilirsiniz. Değişiklikler bir sonraki faturalama döneminizin başında geçerli olur."
+      },
+      {
+        "question": "Çocuklar için dersler mevcut mu?",
+        "answer": "Kesinlikle! 5 yaş ve üzeri çocuklar için özel programlarımız var ve öğretmenlerimiz etkileşimli yöntemlerle genç öğrencileri ilgilendirme konusunda eğitimlidir."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Kur'an Yolculuğunuza Bugün Başlayın",
+    "subtitle": "Kur'an ile bağlantılarını derinleştiren dünya çapında binlerce öğrenciye katılın.",
+    "button": "Ücretsiz Başlayın"
+  },
+  "footer": {
+    "description": "Müslümanları modern teknoloji ve geleneksel ilim aracılığıyla Kur'an ile bağlantı kurmaya güçlendiriyoruz.",
+    "product": {
+      "title": "Ürün",
+      "links": {
+        "features": "Özellikler",
+        "pricing": "Fiyatlandırma",
+        "courses": "Kurslar",
+        "teachers": "Öğretmenler"
+      }
+    },
+    "company": {
+      "title": "Şirket",
+      "links": {
+        "about": "Hakkımızda",
+        "careers": "Kariyer",
+        "blog": "Blog",
+        "press": "Basın"
+      }
+    },
+    "support": {
+      "title": "Destek",
+      "links": {
+        "help": "Yardım Merkezi",
+        "contact": "İletişim",
+        "privacy": "Gizlilik Politikası",
+        "terms": "Hizmet Şartları"
+      }
+    },
+    "copyright": "© 2025 Quran Academy. Tüm hakları saklıdır."
+  },
+  "language": {
+    "select": "Dil Seçin",
+    "apply": "Uygula",
+    "cancel": "İptal",
+    "options": {
+      "en": "İngilizce",
+      "tr": "Türkçe",
+      "ru": "Rusça",
+      "zh": "Çince"
+    }
+  }
+}
+

@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "subtitle": "Begin Your Journey Today",
+    "title": "Learn the Quran with",
+    "titleHighlight": "Expert Teachers",
+    "description": "Master Quran recitation, Tajweed, and Arabic from the comfort of your home with personalized 1-on-1 lessons from certified scholars.",
+    "ctaPrimary": "Start Learning Free",
+    "ctaSecondary": "Explore Courses"
+  },
+  "features": {
+    "title": "Why Choose Quran Academy?",
+    "subtitle": "Our platform combines traditional Islamic scholarship with modern learning technology.",
+    "items": [
+      {
+        "icon": "🎓",
+        "title": "Certified Teachers",
+        "description": "Learn from scholars with Ijazah certification and years of teaching experience."
+      },
+      {
+        "icon": "🕐",
+        "title": "Flexible Schedule",
+        "description": "Book classes that fit your lifestyle, available 24/7 across all time zones."
+      },
+      {
+        "icon": "📱",
+        "title": "Learn Anywhere",
+        "description": "Access lessons on any device - desktop, tablet, or mobile."
+      },
+      {
+        "icon": "📊",
+        "title": "Track Progress",
+        "description": "Monitor your learning journey with detailed progress reports and milestones."
+      },
+      {
+        "icon": "👨‍👩‍👧‍👦",
+        "title": "Family Plans",
+        "description": "Special pricing for families learning together with shared dashboards."
+      },
+      {
+        "icon": "🏆",
+        "title": "Certification",
+        "description": "Earn recognized certificates upon completing each course level."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your learning goals. All plans include a 7-day free trial.",
+    "mostPopular": "MOST POPULAR",
+    "perMonth": "/month",
+    "startTrial": "Start Free Trial",
+    "plans": [
+      {
+        "name": "Starter",
+        "description": "Perfect for beginners",
+        "price": 29,
+        "features": [
+          "2 live sessions/week",
+          "Basic Quran reading",
+          "Progress tracking",
+          "Email support"
+        ]
+      },
+      {
+        "name": "Professional",
+        "description": "Most popular choice",
+        "price": 59,
+        "features": [
+          "5 live sessions/week",
+          "Tajweed mastery",
+          "Memorization program",
+          "Priority support",
+          "1-on-1 mentorship"
+        ]
+      },
+      {
+        "name": "Scholar",
+        "description": "For serious students",
+        "price": 99,
+        "features": [
+          "Unlimited sessions",
+          "Advanced Arabic",
+          "Tafseer studies",
+          "Ijazah preparation",
+          "Dedicated teacher"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about learning with Quran Academy.",
+    "items": [
+      {
+        "question": "How does online Quran learning work?",
+        "answer": "Our platform connects you with certified teachers via live video sessions. You can schedule classes at your convenience and learn at your own pace with personalized attention."
+      },
+      {
+        "question": "Do I need any prior knowledge to start?",
+        "answer": "Not at all! We welcome complete beginners. Our curriculum starts from the basics of Arabic letters and gradually progresses to fluent Quran recitation."
+      },
+      {
+        "question": "What is Tajweed and why is it important?",
+        "answer": "Tajweed is the set of rules governing the proper pronunciation of the Quran. It ensures the Quran is recited as it was revealed, preserving its beauty and meaning."
+      },
+      {
+        "question": "Can I cancel or change my subscription?",
+        "answer": "Yes, you can cancel or modify your subscription at any time. Changes take effect at the start of your next billing cycle."
+      },
+      {
+        "question": "Are classes available for children?",
+        "answer": "Absolutely! We have specialized programs for children aged 5 and up, with teachers trained in engaging young learners through interactive methods."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Begin Your Quran Journey Today",
+    "subtitle": "Join thousands of students worldwide who are deepening their connection with the Quran.",
+    "button": "Get Started Free"
+  },
+  "footer": {
+    "description": "Empowering Muslims worldwide to connect with the Quran through modern technology and traditional scholarship.",
+    "product": {
+      "title": "Product",
+      "links": {
+        "features": "Features",
+        "pricing": "Pricing",
+        "courses": "Courses",
+        "teachers": "Teachers"
+      }
+    },
+    "company": {
+      "title": "Company",
+      "links": {
+        "about": "About Us",
+        "careers": "Careers",
+        "blog": "Blog",
+        "press": "Press"
+      }
+    },
+    "support": {
+      "title": "Support",
+      "links": {
+        "help": "Help Center",
+        "contact": "Contact Us",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      }
+    },
+    "copyright": "© 2025 Quran Academy. All rights reserved."
+  },
+  "language": {
+    "select": "Select Language",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "options": {
+      "en": "English",
+      "tr": "Turkish",
+      "ru": "Russian",
+      "zh": "Chinese"
+    }
+  }
+}
+
