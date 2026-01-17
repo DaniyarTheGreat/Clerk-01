@@ -54,10 +54,11 @@
   },
   "pricing": {
     "title": "Basit, Şeffaf Fiyatlandırma",
-    "subtitle": "Öğrenme hedeflerinize uygun planı seçin. Tüm planlar 7 günlük ücretsiz deneme içerir.",
+    "subtitle": "Öğrenme hedeflerinize uygun planı seçin. Tek seferlik satın alma, ömür boyu erişim.",
     "mostPopular": "EN POPÜLER",
     "perMonth": "/ay",
     "startTrial": "Ücretsiz Denemeyi Başlat",
+    "addToCart": "Sepete Ekle",
     "plans": [
       {
         "name": "Başlangıç",
@@ -168,6 +169,20 @@
       "ru": "Rusça",
       "zh": "Çince"
     }
+  },
+  "cart": {
+    "title": "Alışveriş Sepeti",
+    "empty": "Sepetiniz boş",
+    "emptyDescription": "Alışverişe devam etmek için sepete ürün eklemeye başlayın.",
+    "browseProducts": "Ürünlere Göz At",
+    "remove": "Kaldır",
+    "total": "Toplam",
+    "checkout": "Ödemeye Geç",
+    "signInRequired": "Giriş Gerekli",
+    "signInDescription": "Alışveriş sepetinizi görüntülemek için lütfen giriş yapın.",
+    "signIn": "Giriş Yap",
+    "signInToCheckout": "Ödemeye devam etmek için lütfen giriş yapın.",
+    "signInToCheckoutButton": "Ödeme İçin Giriş Yap"
   }
 }
 

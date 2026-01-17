@@ -1,9 +1,11 @@
 'use client'
 
 import { useLanguage } from '../lib/language-context'
+import { useCart } from '../lib/cart-context'
 
 export default function Pricing() {
   const { t } = useLanguage()
+  const { addToCart } = useCart()
 
   return (
     <section id="pricing" className="py-24 bg-gradient-to-b from-emerald-50 to-white">
@@ -44,9 +46,6 @@ export default function Pricing() {
                   <span className={`text-4xl font-bold ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
                     ${plan.price}
                   </span>
-                  <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-500'}>
-                    {t.pricing.perMonth}
-                  </span>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, j) => (
@@ -59,13 +58,20 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <button
-                  className={`w-full py-3 rounded-lg font-medium transition ${
+                  onClick={() => addToCart({
+                    id: plan.name.toLowerCase(),
+                    name: plan.name,
+                    price: plan.price,
+                    description: plan.description,
+                    features: plan.features
+                  })}
+                  className={`w-full py-3 rounded-lg font-medium transition cursor-pointer ${
                     isHighlighted
                       ? 'bg-white text-emerald-600 hover:bg-emerald-50'
                       : 'bg-emerald-600 text-white hover:bg-emerald-700'
                   }`}
                 >
-                  {t.pricing.startTrial}
+                  {t.pricing.addToCart}
                 </button>
               </div>
             )

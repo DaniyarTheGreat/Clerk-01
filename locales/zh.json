@@ -54,10 +54,11 @@
   },
   "pricing": {
     "title": "简单透明的定价",
-    "subtitle": "选择适合您学习目标的计划。所有计划包括7天免费试用。",
+    "subtitle": "选择适合您学习目标的计划。一次性购买，终身访问。",
     "mostPopular": "最受欢迎",
     "perMonth": "/月",
     "startTrial": "开始免费试用",
+    "addToCart": "添加到购物车",
     "plans": [
       {
         "name": "入门版",
@@ -168,6 +169,20 @@
       "ru": "俄语",
       "zh": "中文"
     }
+  },
+  "cart": {
+    "title": "购物车",
+    "empty": "您的购物车是空的",
+    "emptyDescription": "开始将产品添加到购物车以继续购物。",
+    "browseProducts": "浏览产品",
+    "remove": "删除",
+    "total": "总计",
+    "checkout": "前往结账",
+    "signInRequired": "需要登录",
+    "signInDescription": "请登录以查看您的购物车。",
+    "signIn": "登录",
+    "signInToCheckout": "请登录以继续结账。",
+    "signInToCheckoutButton": "登录结账"
   }
 }
 

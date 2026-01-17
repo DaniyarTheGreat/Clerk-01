@@ -54,10 +54,11 @@
   },
   "pricing": {
     "title": "Simple, Transparent Pricing",
-    "subtitle": "Choose the plan that fits your learning goals. All plans include a 7-day free trial.",
+    "subtitle": "Choose the plan that fits your learning goals. One-time purchase, lifetime access.",
     "mostPopular": "MOST POPULAR",
     "perMonth": "/month",
     "startTrial": "Start Free Trial",
+    "addToCart": "Add to Cart",
     "plans": [
       {
         "name": "Starter",
@@ -168,6 +169,20 @@
       "ru": "Russian",
       "zh": "Chinese"
     }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "emptyDescription": "Start adding products to your cart to continue shopping.",
+    "browseProducts": "Browse Products",
+    "remove": "Remove",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "signInRequired": "Sign In Required",
+    "signInDescription": "Please sign in to view your shopping cart.",
+    "signIn": "Sign In",
+    "signInToCheckout": "Please sign in to proceed with checkout.",
+    "signInToCheckoutButton": "Sign In to Checkout"
   }
 }
 
