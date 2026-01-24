@@ -3,6 +3,7 @@
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 import { useLanguage } from '../../lib/language-context'
 import { useCart } from '../../lib/cart-context'
+import { createCheckoutSession } from '../../lib/api'
 import Link from 'next/link'
 
 function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
@@ -16,60 +17,23 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
         name: item.name
       }));
 
-      // Backend expects the array wrapped in an object with 'items' key
-      const requestBody = { items };
-      
       console.log('Cart items:', cart);
-      console.log('Sending request body:', requestBody);
-      const bodyString = JSON.stringify(requestBody);
-      console.log('Stringified body:', bodyString);
-      console.log('Body length:', bodyString.length);
+      console.log('Sending items to checkout:', items);
 
-      // 1. Must be a POST request with cart array in body wrapped in { items: [...] }
-      const response = await fetch('http://localhost:4000/api/payments/create-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        // Ensure body is sent as string
-        body: bodyString,
-      });
-
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
-
-      // Check if response has content before trying to parse JSON
-      const contentType = response.headers.get('content-type');
-      console.log('Response content-type:', contentType);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Response error text:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
-      }
-
-      // Only parse as JSON if content-type indicates JSON
-      let data;
-      if (contentType && contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const text = await response.text();
-        console.error('Non-JSON response:', text);
-        throw new Error(`Expected JSON but got: ${contentType}`);
-      }
+      // Use axios-based API service
+      const response = await createCheckoutSession(items);
       
-      console.log('Response data:', data);
+      console.log('Checkout session response:', response);
   
-      if (data.url) {
-        // 2. This line actually sends the user to Stripe!
-        window.location.href = data.url; 
+      if (response.url) {
+        // Redirect user to Stripe checkout
+        window.location.href = response.url; 
       } else {
-        console.error("No URL received from backend", data);
+        console.error("No URL received from backend", response);
         alert('No checkout URL received from server');
       }
     } catch (error) {
-      console.error("Connection failed:", error);
+      console.error("Checkout failed:", error);
       alert(`Checkout failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
