@@ -82,6 +82,16 @@ export interface CreateUserResponse {
   data: any;
 }
 
+export interface VerifySessionResponse {
+  valid: boolean;
+  paid: boolean;
+  session_id?: string;
+  customer_email?: string;
+  amount_total?: number;
+  currency?: string;
+  error?: string;
+}
+
 /**
  * Create a Stripe checkout session
  * @param items Array of items with name property
@@ -119,9 +129,8 @@ export const createCheckoutSession = async (
  */
 export const checkUserExists = async (email: string): Promise<boolean> => {
   try {
-    const response = await apiClient.post<CheckUserResponse>(
-      '/client/check',
-      { email }
+    const response = await apiClient.get<CheckUserResponse>(
+      `/client/check?email=${encodeURIComponent(email)}`
     );
     return response.data.exists;
   } catch (error) {
@@ -163,6 +172,35 @@ export const createUser = async (
           throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
         }
         throw new Error(errorData.error || 'Failed to create user');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
+/**
+ * Verify a Stripe checkout session
+ * @param sessionId Stripe checkout session ID from URL query parameter
+ * @returns Session verification result with payment status
+ */
+export const verifySession = async (
+  sessionId: string
+): Promise<VerifySessionResponse> => {
+  try {
+    const response = await apiClient.get<VerifySessionResponse>(
+      `/payments/verify-session?session_id=${sessionId}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to verify session');
       }
       throw new Error(axiosError.message || 'Network error occurred');
     }

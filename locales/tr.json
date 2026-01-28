@@ -54,7 +54,7 @@
   },
   "pricing": {
     "title": "Basit, Şeffaf Fiyatlandırma",
-    "subtitle": "Öğrenme hedeflerinize uygun planı seçin. Tek seferlik satın alma, ömür boyu erişim.",
+    "subtitle": "Öğrenme hedeflerinize uygun planı seçin. Tüm planlar 7 günlük ücretsiz deneme içerir.",
     "mostPopular": "EN POPÜLER",
     "perMonth": "/ay",
     "startTrial": "Ücretsiz Denemeyi Başlat",
@@ -183,6 +183,24 @@
     "signIn": "Giriş Yap",
     "signInToCheckout": "Ödemeye devam etmek için lütfen giriş yapın.",
     "signInToCheckoutButton": "Ödeme İçin Giriş Yap"
+  },
+  "checkout": {
+    "verifying": "Ödemeniz doğrulanıyor...",
+    "verificationFailed": "Doğrulama Başarısız",
+    "invalidSession": "Geçersiz veya eksik ödeme oturumu.",
+    "redirecting": "Sizi geri yönlendiriyoruz...",
+    "successTitle": "Ödeme Başarılı!",
+    "successMessage": "Satın aldığınız için teşekkürler. Ödemeniz başarıyla işlendi.",
+    "paymentDetails": "Ödeme Detayları",
+    "email": "E-posta",
+    "amount": "Tutar",
+    "backToHome": "Ana Sayfaya Dön",
+    "viewMorePlans": "Daha Fazla Plan Görüntüle",
+    "cancelTitle": "Ödeme İptal Edildi",
+    "cancelMessage": "Ödemeniz iptal edildi. Hesabınızdan herhangi bir ücret alınmadı.",
+    "cancelDescription": "Ödeme sırasında herhangi bir sorunla karşılaştıysanız, lütfen tekrar deneyin veya destek ekibimizle iletişime geçin.",
+    "backToCart": "Sepete Dön",
+    "viewPlans": "Planları Görüntüle"
   }
 }
 

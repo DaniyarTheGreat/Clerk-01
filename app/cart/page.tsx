@@ -1,20 +1,72 @@
 'use client'
 
-import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs'
 import { useLanguage } from '../../lib/language-context'
 import { useCart } from '../../lib/cart-context'
-import { createCheckoutSession } from '../../lib/api'
+import { createCheckoutSession, checkUserExists, createUser } from '../../lib/api'
 import Link from 'next/link'
 
 function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
   const { t } = useLanguage()
   const { cart, removeFromCart, getTotalPrice } = useCart()
+  const { user } = useUser()
+
+  const userEmail = user?.emailAddresses[0]?.emailAddress
+  const userFullName = user?.fullName
+
+  async function checkUser() {
+    try {
+      
+      if (!userEmail) {
+        console.error('No email found for user');
+        return false;
+      }
+
+      // Check if user exists in the backend
+      const exists = await checkUserExists(userEmail);
+      
+      console.log('User exists in backend:', exists);
+      return exists;
+    } catch (error) {
+      console.error('Error checking user:', error);
+      alert(`Failed to check user: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      return false;
+    }
+  }
+
+  async function createNewUserRecord() {
+    try {
+
+      if (!userEmail) {
+        console.error('No email found for user');
+        return false;
+      }
+
+      if (!userFullName) {
+        console.error('No name found for user');
+        return false;
+      }
+
+      const userData = { email: userEmail, full_name: userFullName, phone: undefined };
+
+      const response = await createUser(userData);
+
+      console.log('Create User Response:', response);
+      return response;
+    } catch (error) {
+      console.error("Create user failed:", error);
+      alert(`Create user failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
 
   async function checkoutSession() {
-    try {
+    try {      
+      
       // Map cart items to backend format using cart item names
       const items = cart.map((item) => ({
-        name: item.name
+        name: item.name,
+        email: userEmail // Include user's email
       }));
 
       console.log('Cart items:', cart);
@@ -24,7 +76,7 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
       const response = await createCheckoutSession(items);
       
       console.log('Checkout session response:', response);
-  
+   
       if (response.url) {
         // Redirect user to Stripe checkout
         window.location.href = response.url; 
@@ -35,6 +87,37 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
     } catch (error) {
       console.error("Checkout failed:", error);
       alert(`Checkout failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  // Orchestrator function that handles the complete checkout flow
+  async function handleCheckout() {
+    try {
+      console.log('Starting checkout process...');
+      
+      // Step 1: Check if user exists in backend
+      const userExists = await checkUser();
+      
+      // Step 2: If user doesn't exist, create new user record
+      if (!userExists) {
+        console.log('User does not exist, creating new user record...');
+        const createResult = await createNewUserRecord();
+        
+        if (!createResult) {
+          console.error('Failed to create user record');
+          return;
+        }
+        console.log('User record created successfully');
+      } else {
+        console.log('User already exists in backend');
+      }
+      
+      // Step 3: Proceed with checkout session
+      await checkoutSession();
+      
+    } catch (error) {
+      console.error('Checkout process failed:', error);
+      alert(`Checkout process failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -110,7 +193,7 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
           </div>
         ) : (
           <button 
-            onClick={checkoutSession}
+            onClick={handleCheckout}
             className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium py-4 text-lg transition cursor-pointer"
           >
             {t.cart.checkout}

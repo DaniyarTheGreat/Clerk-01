@@ -54,7 +54,7 @@
   },
   "pricing": {
     "title": "Simple, Transparent Pricing",
-    "subtitle": "Choose the plan that fits your learning goals. One-time purchase, lifetime access.",
+    "subtitle": "Choose the plan that fits your learning goals. All plans include a 7-day free trial.",
     "mostPopular": "MOST POPULAR",
     "perMonth": "/month",
     "startTrial": "Start Free Trial",
@@ -183,6 +183,24 @@
     "signIn": "Sign In",
     "signInToCheckout": "Please sign in to proceed with checkout.",
     "signInToCheckoutButton": "Sign In to Checkout"
+  },
+  "checkout": {
+    "verifying": "Verifying your payment...",
+    "verificationFailed": "Verification Failed",
+    "invalidSession": "Invalid or incomplete payment session.",
+    "redirecting": "Redirecting you back...",
+    "successTitle": "Payment Successful!",
+    "successMessage": "Thank you for your purchase. Your payment has been processed successfully.",
+    "paymentDetails": "Payment Details",
+    "email": "Email",
+    "amount": "Amount",
+    "backToHome": "Back to Home",
+    "viewMorePlans": "View More Plans",
+    "cancelTitle": "Payment Cancelled",
+    "cancelMessage": "Your payment was cancelled. No charges were made to your account.",
+    "cancelDescription": "If you encountered any issues during checkout, please try again or contact our support team.",
+    "backToCart": "Back to Cart",
+    "viewPlans": "View Plans"
   }
 }
 

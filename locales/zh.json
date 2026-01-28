@@ -54,7 +54,7 @@
   },
   "pricing": {
     "title": "简单透明的定价",
-    "subtitle": "选择适合您学习目标的计划。一次性购买，终身访问。",
+    "subtitle": "选择适合您学习目标的计划。所有计划包括7天免费试用。",
     "mostPopular": "最受欢迎",
     "perMonth": "/月",
     "startTrial": "开始免费试用",
@@ -183,6 +183,24 @@
     "signIn": "登录",
     "signInToCheckout": "请登录以继续结账。",
     "signInToCheckoutButton": "登录结账"
+  },
+  "checkout": {
+    "verifying": "正在验证您的付款...",
+    "verificationFailed": "验证失败",
+    "invalidSession": "无效或不完整的付款会话。",
+    "redirecting": "正在将您重定向回去...",
+    "successTitle": "付款成功！",
+    "successMessage": "感谢您的购买。您的付款已成功处理。",
+    "paymentDetails": "付款详情",
+    "email": "电子邮件",
+    "amount": "金额",
+    "backToHome": "返回首页",
+    "viewMorePlans": "查看更多计划",
+    "cancelTitle": "付款已取消",
+    "cancelMessage": "您的付款已取消。您的账户未产生任何费用。",
+    "cancelDescription": "如果您在结账过程中遇到任何问题，请重试或联系我们的支持团队。",
+    "backToCart": "返回购物车",
+    "viewPlans": "查看计划"
   }
 }
 
