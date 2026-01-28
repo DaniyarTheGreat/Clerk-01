@@ -22,19 +22,33 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    // Initialize from storage without using an effect (avoids setState-in-effect lint).
+    if (typeof window === 'undefined') return []
 
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart')
-    if (savedCart) {
-      try {
-        setCart(JSON.parse(savedCart))
-      } catch (error) {
-        console.error('Error loading cart from localStorage:', error)
-      }
+    // Requirement: when the user first opens the site (new browser session),
+    // start with an empty cart.
+    const sessionKey = 'cart_session_initialized'
+    const isNewSession = !window.sessionStorage.getItem(sessionKey)
+
+    if (isNewSession) {
+      window.sessionStorage.setItem(sessionKey, '1')
+      window.localStorage.removeItem('cart')
+      return []
     }
-  }, [])
+
+    const savedCart = window.localStorage.getItem('cart')
+    if (!savedCart) return []
+
+    try {
+      return JSON.parse(savedCart) as CartItem[]
+    } catch (error) {
+      // If storage is corrupted, reset so the cart doesn't get "stuck".
+      console.error('Error loading cart from localStorage:', error)
+      window.localStorage.removeItem('cart')
+      return []
+    }
+  })
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
