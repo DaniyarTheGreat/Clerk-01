@@ -20,7 +20,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Quran Academy - Learn the Quran Online',
+  title: 'Saqia Madrasa- Learn the Quran Online',
   description: 'Master Quran recitation, Tajweed, and Arabic with expert teachers',
 }
 
@@ -37,7 +37,7 @@ export default function RootLayout({
             <CartProvider>
               <Navigation />
               <LanguageSelector />
-              <main className="pt-16">
+              <main className="pt-20">
                 {children}
               </main>
               <Footer />

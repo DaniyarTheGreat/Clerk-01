@@ -17,7 +17,7 @@
     "ctaSecondary": "Kursları Keşfet"
   },
   "features": {
-    "title": "Neden Quran Academy?",
+    "title": "Neden Saqia Madrasa?",
     "subtitle": "Platformumuz geleneksel İslami ilim ile modern öğrenme teknolojisini birleştirir.",
     "items": [
       {
@@ -99,7 +99,7 @@
   },
   "faq": {
     "title": "Sık Sorulan Sorular",
-    "subtitle": "Quran Academy ile öğrenme hakkında bilmeniz gereken her şey.",
+    "subtitle": "Saqia Madrasa ile öğrenme hakkında bilmeniz gereken her şey.",
     "items": [
       {
         "question": "Online Kur'an öğrenimi nasıl çalışır?",
@@ -157,7 +157,7 @@
         "terms": "Hizmet Şartları"
       }
     },
-    "copyright": "© 2025 Quran Academy. Tüm hakları saklıdır."
+    "copyright": "© 2025 Saqia Madrasa. Tüm hakları saklıdır."
   },
   "language": {
     "select": "Dil Seçin",

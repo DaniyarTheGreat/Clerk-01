@@ -17,7 +17,7 @@
     "ctaSecondary": "Explore Courses"
   },
   "features": {
-    "title": "Why Choose Quran Academy?",
+    "title": "Why Choose Saqia Madrasa?",
     "subtitle": "Our platform combines traditional Islamic scholarship with modern learning technology.",
     "items": [
       {
@@ -99,7 +99,7 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Everything you need to know about learning with Quran Academy.",
+    "subtitle": "Everything you need to know about learning with Saqia Madrasa.",
     "items": [
       {
         "question": "How does online Quran learning work?",
@@ -157,7 +157,7 @@
         "terms": "Terms of Service"
       }
     },
-    "copyright": "© 2025 Quran Academy. All rights reserved."
+    "copyright": "© 2025 Saqia Madrasa. All rights reserved."
   },
   "language": {
     "select": "Select Language",

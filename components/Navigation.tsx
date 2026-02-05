@@ -8,6 +8,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '../lib/language-context'
 import { useCart } from '../lib/cart-context'
 import { useEffect, useState } from 'react'
@@ -25,10 +26,24 @@ export default function Navigation() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-emerald-100">
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
-          <span className="text-2xl">📖</span>
-          <span className="font-amiri text-xl font-bold text-emerald-900">Quran Academy</span>
+      <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-4 hover:opacity-90 transition-opacity">
+          <div className="h-16 flex items-center justify-center bg-white">
+            <Image
+              src="/logo.svg"
+              alt="Saqia Madrasa Logo"
+              width={80}
+              height={80}
+              className="h-16 w-auto object-contain"
+              quality={100}
+              priority
+              style={{ 
+                filter: 'contrast(1.1)',
+                mixBlendMode: 'multiply'
+              }}
+            />
+          </div>
+          <span className="font-amiri text-2xl md:text-3xl font-bold text-emerald-900 tracking-tight">Saqia Madrasa</span>
         </a>
         
         <div className="hidden md:flex items-center gap-8">

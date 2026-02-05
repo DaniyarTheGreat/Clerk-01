@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useLanguage } from '../lib/language-context'
 
 export default function Footer() {
@@ -10,9 +11,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">📖</span>
-              <span className="font-amiri text-xl font-bold">Quran Academy</span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-20 flex items-center justify-center bg-emerald-950">
+                <Image
+                  src="/logo.svg"
+                  alt="Saqia Madrasa Logo"
+                  width={80}
+                  height={80}
+                  className="h-20 w-auto object-contain"
+                  quality={100}
+                  style={{ 
+                    filter: 'brightness(1.2) contrast(1.1)',
+                    mixBlendMode: 'screen'
+                  }}
+                />
+              </div>
+              <span className="font-amiri text-2xl md:text-3xl font-bold text-white tracking-tight">Saqia Madrasa</span>
             </div>
             <p className="text-emerald-200 text-sm leading-relaxed">
               {t.footer.description}
