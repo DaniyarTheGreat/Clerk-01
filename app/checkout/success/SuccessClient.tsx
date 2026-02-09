@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useLanguage } from '../../../lib/language-context'
-import { verifySession } from '../../../lib/api'
+import { verifySession, updatePurchase } from '../../../lib/api'
 import { useCart } from '../../../lib/cart-context'
 import Link from 'next/link'
 
@@ -20,6 +20,7 @@ export default function SuccessClient() {
     amount_total?: number
     currency?: string
   } | null>(null)
+  const hasStartedRef = useRef(false)
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id')
@@ -30,12 +31,20 @@ export default function SuccessClient() {
       return
     }
 
+    // Prevent re-execution when deps change (e.g. clearCart gets new reference after cart update)
+    if (hasStartedRef.current) return
+    hasStartedRef.current = true
+
     // Verify the session with backend
     const verifyPayment = async () => {
       try {
         const result = await verifySession(sessionId)
 
         if (result.valid && result.paid) {
+          // Update purchase record in database (PENDING -> SUCCESS)
+          await updatePurchase(sessionId)
+          // Register the student in the database
+          
           // Successful purchase: empty the cart.
           clearCart()
           setIsValid(true)

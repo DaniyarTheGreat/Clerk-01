@@ -92,6 +92,10 @@ export interface VerifySessionResponse {
   error?: string;
 }
 
+export interface UpdatePurchaseResponse {
+  message: string;
+}
+
 /**
  * Create a Stripe checkout session
  * @param items Array of items with name property
@@ -201,6 +205,36 @@ export const verifySession = async (
           throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
         }
         throw new Error(errorData.error || 'Failed to verify session');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
+/**
+ * Update purchase record status to SUCCESS after payment is verified
+ * @param sessionId Stripe checkout session ID
+ * @returns Success message
+ */
+export const updatePurchase = async (
+  sessionId: string
+): Promise<UpdatePurchaseResponse> => {
+  try {
+    const response = await apiClient.post<UpdatePurchaseResponse>(
+      '/payments/update-session',
+      { session_id: sessionId }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to update purchase');
       }
       throw new Error(axiosError.message || 'Network error occurred');
     }
