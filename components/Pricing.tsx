@@ -1,11 +1,104 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useLanguage } from '../lib/language-context'
 import { useCart } from '../lib/cart-context'
+import { getBatch, Batch } from '../lib/api'
+
+// Map backend class types to frontend product indices
+const classTypeToIndex: Record<string, number> = {
+  'beginner': 0,      // Starter
+  'intermediate': 1, // Professional
+  'advanced': 2      // Scholar
+}
+
+const indexToClassType: Record<number, string> = {
+  0: 'beginner',
+  1: 'intermediate',
+  2: 'advanced'
+}
 
 export default function Pricing() {
   const { t } = useLanguage()
   const { addToCart } = useCart()
+  const [batches, setBatches] = useState<Batch[]>([])
+  const [loading, setLoading] = useState(true)
+  const [currentBatchIndex, setCurrentBatchIndex] = useState<Record<number, number>>({
+    0: 0, // beginner
+    1: 0, // intermediate
+    2: 0  // advanced
+  })
+
+  useEffect(() => {
+    const fetchBatches = async () => {
+      try {
+        setLoading(true)
+        const data = await getBatch()
+        setBatches(data)
+      } catch (error) {
+        console.error('Failed to fetch batches:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchBatches()
+  }, [])
+
+  // Group batches by class_type
+  const batchesByType = batches.reduce((acc, batch) => {
+    const type = batch.class_type
+    if (!acc[type]) {
+      acc[type] = []
+    }
+    acc[type].push(batch)
+    return acc
+  }, {} as Record<string, Batch[]>)
+
+  // Sort batches by start_date for each type
+  Object.keys(batchesByType).forEach(type => {
+    batchesByType[type].sort((a, b) => 
+      new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+    )
+  })
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  }
+
+  const handleNext = (planIndex: number) => {
+    const classType = indexToClassType[planIndex]
+    const typeBatches = batchesByType[classType] || []
+    setCurrentBatchIndex(prev => ({
+      ...prev,
+      [planIndex]: Math.min(prev[planIndex] + 1, typeBatches.length - 1)
+    }))
+  }
+
+  const handlePrevious = (planIndex: number) => {
+    setCurrentBatchIndex(prev => ({
+      ...prev,
+      [planIndex]: Math.max(prev[planIndex] - 1, 0)
+    }))
+  }
+
+  if (loading) {
+    return (
+      <section id="pricing" className="py-24 bg-gradient-to-b from-emerald-50 to-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t.pricing.title}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {t.pricing.subtitle}
+            </p>
+          </div>
+          <div className="text-center text-gray-600">Loading batches...</div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="pricing" className="py-24 bg-gradient-to-b from-emerald-50 to-white">
@@ -22,6 +115,14 @@ export default function Pricing() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {t.pricing.plans.map((plan, i) => {
             const isHighlighted = i === 1 // Professional plan is highlighted
+            const classType = indexToClassType[i]
+            const typeBatches = batchesByType[classType] || []
+            const currentIndex = currentBatchIndex[i] || 0
+            const currentBatch = typeBatches[currentIndex]
+            const hasMultipleBatches = typeBatches.length > 1
+            const canGoNext = currentIndex < typeBatches.length - 1
+            const canGoPrevious = currentIndex > 0
+
             return (
               <div
                 key={i}
@@ -36,12 +137,102 @@ export default function Pricing() {
                     {t.pricing.mostPopular}
                   </span>
                 )}
+                
+                {/* Batch Navigation */}
+                {hasMultipleBatches && (
+                  <div className="flex items-center justify-between mb-4">
+                    <button
+                      onClick={() => handlePrevious(i)}
+                      disabled={!canGoPrevious}
+                      className={`p-2 rounded-lg transition ${
+                        canGoPrevious
+                          ? isHighlighted
+                            ? 'bg-emerald-500 text-white hover:bg-emerald-400'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          : isHighlighted
+                            ? 'bg-emerald-700 text-emerald-300 cursor-not-allowed'
+                            : 'bg-gray-50 text-gray-300 cursor-not-allowed'
+                      }`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <span className={`text-xs ${isHighlighted ? 'text-emerald-100' : 'text-gray-500'}`}>
+                      Batch {currentIndex + 1} of {typeBatches.length}
+                    </span>
+                    <button
+                      onClick={() => handleNext(i)}
+                      disabled={!canGoNext}
+                      className={`p-2 rounded-lg transition ${
+                        canGoNext
+                          ? isHighlighted
+                            ? 'bg-emerald-500 text-white hover:bg-emerald-400'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          : isHighlighted
+                            ? 'bg-emerald-700 text-emerald-300 cursor-not-allowed'
+                            : 'bg-gray-50 text-gray-300 cursor-not-allowed'
+                      }`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+
                 <h3 className={`text-xl font-bold mb-1 ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
                   {plan.name}
                 </h3>
                 <p className={`text-sm mb-4 ${isHighlighted ? 'text-emerald-100' : 'text-gray-500'}`}>
                   {plan.description}
                 </p>
+
+                {/* Batch Information */}
+                {currentBatch && (
+                  <div className={`mb-4 p-4 rounded-lg ${isHighlighted ? 'bg-emerald-500/30' : 'bg-gray-50'}`}>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Start Date:</span>
+                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
+                          {formatDate(currentBatch.start_date)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>End Date:</span>
+                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
+                          {formatDate(currentBatch.end_date)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Duration:</span>
+                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
+                          {currentBatch.length} {currentBatch.length === 1 ? 'week' : 'weeks'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Students:</span>
+                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
+                          {currentBatch.students} / {currentBatch.max_students}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Spots Available:</span>
+                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
+                          {currentBatch.max_students - currentBatch.students}
+                        </span>
+                      </div>
+                      {currentBatch.description && (
+                        <div className="pt-2 border-t border-emerald-200/30">
+                          <p className={isHighlighted ? 'text-emerald-50 text-xs' : 'text-gray-600 text-xs'}>
+                            {currentBatch.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-6">
                   <span className={`text-4xl font-bold ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
                     ${plan.price}
@@ -59,7 +250,9 @@ export default function Pricing() {
                 </ul>
                 <button
                   onClick={() => addToCart({
-                    id: plan.name.toLowerCase(),
+                    id: currentBatch 
+                      ? `${plan.name.toLowerCase()}-batch-${currentBatch.batch_num}`
+                      : plan.name.toLowerCase(),
                     name: plan.name,
                     price: plan.price,
                     description: plan.description,

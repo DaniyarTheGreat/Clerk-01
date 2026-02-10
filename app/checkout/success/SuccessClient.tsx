@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useLanguage } from '../../../lib/language-context'
-import { verifySession, updatePurchase } from '../../../lib/api'
+import { verifySession, updatePurchase, registerStudent } from '../../../lib/api'
 import { useCart } from '../../../lib/cart-context'
 import Link from 'next/link'
 
@@ -44,7 +44,11 @@ export default function SuccessClient() {
           // Update purchase record in database (PENDING -> SUCCESS)
           await updatePurchase(sessionId)
           // Register the student in the database
-          
+          const registerStudentResult = await registerStudent({
+            batch_number: result.batch_number,
+            full_name: result.full_name,
+            user_id: result.user_id,
+          })
           // Successful purchase: empty the cart.
           clearCart()
           setIsValid(true)

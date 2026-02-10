@@ -96,6 +96,19 @@ export interface UpdatePurchaseResponse {
   message: string;
 }
 
+export interface RegisterStudentRequest {
+  batch_number: string | number;
+  full_name: string;
+  user_id: string;
+}
+
+export interface RegisterStudentResponse {
+  message: string;
+  error?: string;
+  details?: string;
+  warning?: string;
+}
+
 /**
  * Create a Stripe checkout session
  * @param items Array of items with name property
@@ -235,6 +248,80 @@ export const updatePurchase = async (
           throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
         }
         throw new Error(errorData.error || 'Failed to update purchase');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
+/**
+ * Register a student to a batch
+ * This function registers a student and automatically updates the batch student count.
+ * If the batch reaches max capacity, it will be marked as full and inactive.
+ * @param studentData Student registration data including batch_number, full_name, and user_id
+ * @returns Success message
+ */
+export const registerStudent = async (
+  studentData: RegisterStudentRequest
+): Promise<RegisterStudentResponse> => {
+  try {
+    const response = await apiClient.post<RegisterStudentResponse>(
+      '/client/registerStudent',
+      {
+        batch_number: studentData.batch_number,
+        full_name: studentData.full_name,
+        user_id: studentData.user_id,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[]; details?: string; warning?: string }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        // Return the error response with all details (including warning if present)
+        throw new Error(errorData.error || 'Failed to register student');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
+export interface Batch {
+  start_date: string;
+  end_date: string;
+  active: boolean;
+  students: number;
+  full: boolean;
+  length: number;
+  batch_num: number;
+  max_students: number;
+  description: string | null;
+  class_type: 'beginner' | 'intermediate' | 'advanced';
+}
+
+/**
+ * Get all active batches
+ * @returns Array of active batches
+ */
+export const getBatch = async (): Promise<Batch[]> => {
+  try {
+    const response = await apiClient.get<Batch[]>('/batch/get');
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to fetch batches');
       }
       throw new Error(axiosError.message || 'Network error occurred');
     }
