@@ -66,7 +66,10 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
       // Map cart items to backend format using cart item names
       const items = cart.map((item) => ({
         name: item.name,
-        email: userEmail // Include user's email
+        email: userEmail, // Include user's email
+        start_date: item.start_date,
+        end_date: item.end_date,
+        batch_number: item.batch_number
       }));
 
       console.log('Cart items:', cart);

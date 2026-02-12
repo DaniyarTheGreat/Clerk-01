@@ -138,46 +138,74 @@ export default function Pricing() {
                   </span>
                 )}
                 
-                {/* Batch Navigation */}
+                {/* Batch Navigation — pill selector with optional arrows */}
                 {hasMultipleBatches && (
-                  <div className="flex items-center justify-between mb-4">
-                    <button
-                      onClick={() => handlePrevious(i)}
-                      disabled={!canGoPrevious}
-                      className={`p-2 rounded-lg transition ${
-                        canGoPrevious
-                          ? isHighlighted
-                            ? 'bg-emerald-500 text-white hover:bg-emerald-400'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          : isHighlighted
-                            ? 'bg-emerald-700 text-emerald-300 cursor-not-allowed'
-                            : 'bg-gray-50 text-gray-300 cursor-not-allowed'
-                      }`}
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <span className={`text-xs ${isHighlighted ? 'text-emerald-100' : 'text-gray-500'}`}>
-                      Batch {currentIndex + 1} of {typeBatches.length}
-                    </span>
-                    <button
-                      onClick={() => handleNext(i)}
-                      disabled={!canGoNext}
-                      className={`p-2 rounded-lg transition ${
-                        canGoNext
-                          ? isHighlighted
-                            ? 'bg-emerald-500 text-white hover:bg-emerald-400'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          : isHighlighted
-                            ? 'bg-emerald-700 text-emerald-300 cursor-not-allowed'
-                            : 'bg-gray-50 text-gray-300 cursor-not-allowed'
-                      }`}
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                  <div className="mb-5">
+                    <p className={`text-xs font-medium mb-2.5 ${isHighlighted ? 'text-emerald-200' : 'text-gray-500'}`}>
+                      Choose batch
+                    </p>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handlePrevious(i)}
+                        disabled={!canGoPrevious}
+                        aria-label="Previous batch"
+                        className={`shrink-0 p-1.5 rounded-full transition-all duration-200 ${
+                          canGoPrevious
+                            ? isHighlighted
+                              ? 'text-white hover:bg-white/20 active:scale-95'
+                              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 active:scale-95'
+                            : 'opacity-40 cursor-not-allowed'
+                        }`}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <div className="flex flex-1 justify-center gap-1 min-w-0">
+                        {typeBatches.map((_, batchIdx) => {
+                          const isActive = batchIdx === currentIndex
+                          return (
+                            <button
+                              key={batchIdx}
+                              type="button"
+                              onClick={() => setCurrentBatchIndex(prev => ({ ...prev, [i]: batchIdx }))}
+                              className={`
+                                min-w-[2rem] h-8 px-2 rounded-full text-sm font-medium
+                                transition-all duration-200 ease-out
+                                ${isActive
+                                  ? isHighlighted
+                                    ? 'bg-white text-emerald-600 shadow-md scale-105'
+                                    : 'bg-emerald-600 text-white shadow-md scale-105'
+                                  : isHighlighted
+                                    ? 'bg-white/15 text-emerald-100 hover:bg-white/25'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }
+                              `}
+                            >
+                              {batchIdx + 1}
+                            </button>
+                          )
+                        })}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleNext(i)}
+                        disabled={!canGoNext}
+                        aria-label="Next batch"
+                        className={`shrink-0 p-1.5 rounded-full transition-all duration-200 ${
+                          canGoNext
+                            ? isHighlighted
+                              ? 'text-white hover:bg-white/20 active:scale-95'
+                              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 active:scale-95'
+                            : 'opacity-40 cursor-not-allowed'
+                        }`}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 )}
 
@@ -188,9 +216,12 @@ export default function Pricing() {
                   {plan.description}
                 </p>
 
-                {/* Batch Information */}
+                {/* Batch Information — animated when switching */}
                 {currentBatch && (
-                  <div className={`mb-4 p-4 rounded-lg ${isHighlighted ? 'bg-emerald-500/30' : 'bg-gray-50'}`}>
+                  <div
+                    key={`${i}-${currentIndex}`}
+                    className={`mb-4 p-4 rounded-lg animate-batch-in ${isHighlighted ? 'bg-emerald-500/30' : 'bg-gray-50'}`}
+                  >
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Start Date:</span>
@@ -256,7 +287,10 @@ export default function Pricing() {
                     name: plan.name,
                     price: plan.price,
                     description: plan.description,
-                    features: plan.features
+                    features: plan.features,
+                    start_date: currentBatch?.start_date,
+                    end_date: currentBatch?.end_date,
+                    batch_number: currentBatch?.batch_num
                   })}
                   className={`w-full py-3 rounded-lg font-medium transition cursor-pointer ${
                     isHighlighted

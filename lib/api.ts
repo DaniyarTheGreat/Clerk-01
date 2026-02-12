@@ -61,6 +61,9 @@ apiClient.interceptors.response.use(
 export interface CheckoutItem {
   name: string;
   email?: string; // Optional email for testing
+  start_date?: string;
+  end_date?: string;
+  batch_number?: number;
 }
 
 export interface CheckoutSessionResponse {
@@ -90,6 +93,9 @@ export interface VerifySessionResponse {
   amount_total?: number;
   currency?: string;
   error?: string;
+  batch_number?: string | number;
+  full_name?: string;
+  email?: string;
 }
 
 export interface UpdatePurchaseResponse {
@@ -99,7 +105,9 @@ export interface UpdatePurchaseResponse {
 export interface RegisterStudentRequest {
   batch_number: string | number;
   full_name: string;
-  user_id: string;
+  email: string;
+  start_date?: string;
+  end_date?: string;
 }
 
 export interface RegisterStudentResponse {
@@ -267,11 +275,13 @@ export const registerStudent = async (
 ): Promise<RegisterStudentResponse> => {
   try {
     const response = await apiClient.post<RegisterStudentResponse>(
-      '/client/registerStudent',
+      '/student/register',
       {
         batch_number: studentData.batch_number,
         full_name: studentData.full_name,
-        user_id: studentData.user_id,
+        email: studentData.email,
+        start_date: studentData.start_date,
+        end_date: studentData.end_date,
       }
     );
     return response.data;

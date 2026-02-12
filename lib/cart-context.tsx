@@ -8,6 +8,9 @@ export interface CartItem {
   price: number
   description: string
   features: string[]
+  start_date?: string
+  end_date?: string
+  batch_number?: number
 }
 
 interface CartContextType {

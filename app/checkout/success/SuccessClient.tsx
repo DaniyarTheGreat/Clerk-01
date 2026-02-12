@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 import { useLanguage } from '../../../lib/language-context'
 import { verifySession, updatePurchase, registerStudent } from '../../../lib/api'
 import { useCart } from '../../../lib/cart-context'
@@ -11,7 +12,12 @@ export default function SuccessClient() {
   const { t } = useLanguage()
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { clearCart } = useCart()
+  const { user, isLoaded: isUserLoaded } = useUser()
+  const { clearCart, cart } = useCart()
+  
+  // Get user email and full name from Clerk
+  const userEmail = user?.emailAddresses[0]?.emailAddress
+  const userFullName = user?.fullName
   const [isVerifying, setIsVerifying] = useState(true)
   const [isValid, setIsValid] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -31,6 +37,11 @@ export default function SuccessClient() {
       return
     }
 
+    // Wait for user to be loaded before proceeding
+    if (!isUserLoaded) {
+      return
+    }
+
     // Prevent re-execution when deps change (e.g. clearCart gets new reference after cart update)
     if (hasStartedRef.current) return
     hasStartedRef.current = true
@@ -43,12 +54,33 @@ export default function SuccessClient() {
         if (result.valid && result.paid) {
           // Update purchase record in database (PENDING -> SUCCESS)
           await updatePurchase(sessionId)
-          // Register the student in the database
-          const registerStudentResult = await registerStudent({
-            batch_number: result.batch_number,
-            full_name: result.full_name,
-            user_id: result.user_id,
-          })
+          
+          // Get user info from Clerk (preferred) or fallback to result data
+          const studentEmail = userEmail ?? result.email ?? result.customer_email ?? ''
+          const studentFullName = userFullName ?? result.full_name ?? ''
+          
+          if (!studentEmail) {
+            throw new Error('User email is missing. Please ensure you are signed in.')
+          }
+          
+          if (!studentFullName) {
+            throw new Error('User full name is missing. Please ensure your profile is complete.')
+          }
+          
+          // Register the student for each batch in the cart
+          const itemsToRegister = cart.length > 0 ? cart : [{ batch_number: result.batch_number, start_date: undefined, end_date: undefined }]
+          for (const cartItem of itemsToRegister) {
+            const batchNumber = cartItem.batch_number ?? result.batch_number ?? ''
+            if (batchNumber === '') continue
+            const registerStudentResult = await registerStudent({
+              batch_number: batchNumber,
+              full_name: studentFullName,
+              email: studentEmail,
+              start_date: cartItem.start_date,
+              end_date: cartItem.end_date,
+            })
+            console.log('Register student result for batch', batchNumber, ':', registerStudentResult)
+          }
           // Successful purchase: empty the cart.
           clearCart()
           setIsValid(true)
@@ -69,7 +101,7 @@ export default function SuccessClient() {
     }
 
     verifyPayment()
-  }, [searchParams, clearCart])
+  }, [searchParams, clearCart, isUserLoaded, userEmail, userFullName, cart])
 
   // Redirect if session is invalid
   useEffect(() => {

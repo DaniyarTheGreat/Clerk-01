@@ -20,7 +20,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Saqia Madrasa- Learn the Quran Online',
+  title: 'SAQIA MADRASA- Learn the Quran Online',
   description: 'Master Quran recitation, Tajweed, and Arabic with expert teachers',
 }
 

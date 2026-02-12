@@ -43,7 +43,7 @@ export default function Navigation() {
               }}
             />
           </div>
-          <span className="font-amiri text-2xl md:text-3xl font-bold text-emerald-900 tracking-tight">Saqia Madrasa</span>
+          <span className="font-amiri text-2xl md:text-3xl font-bold text-emerald-900 tracking-tight">SAQIA MADRASA</span>
         </a>
         
         <div className="hidden md:flex items-center gap-8">
