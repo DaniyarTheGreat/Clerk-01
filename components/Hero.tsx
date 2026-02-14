@@ -26,7 +26,7 @@ export default function Hero() {
             <a href="#pricing" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-medium transition shadow-lg shadow-emerald-200">
               {t.hero.ctaPrimary}
             </a>
-            <a href="#features" className="border border-gray-300 hover:border-emerald-300 text-gray-700 px-8 py-3 rounded-lg font-medium transition">
+            <a href="#courses" className="border border-gray-300 hover:border-emerald-300 text-gray-700 px-8 py-3 rounded-lg font-medium transition">
               {t.hero.ctaSecondary}
             </a>
           </div>

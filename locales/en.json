@@ -1,6 +1,7 @@
 {
   "nav": {
     "features": "Features",
+    "courses": "Courses",
     "pricing": "Pricing",
     "faq": "FAQ",
     "about": "About",
@@ -10,11 +11,118 @@
   },
   "hero": {
     "subtitle": "Begin Your Quranic Journey with Hayrunnisa Yengilmes",
-    "title": "Learn the Quran with",
-    "titleHighlight": "Expert Teachers",
-    "description": "Master Quran recitation, Tajweed, and Arabic from the comfort of your home with personalized 1-on-1 lessons from certified scholars.",
-    "ctaPrimary": "Start Learning Free",
+    "title": "Begin Your Quranic Journey with",
+    "titleHighlight": "Hayrunnisa Yengilmes",
+    "description": "Saqia Madrasa is pleased to announce the opening of its 2026 Quran Learning Programs.",
+    "ctaPrimary": "Start Learning",
     "ctaSecondary": "Explore Courses"
+  },
+  "notice": {
+    "womenOnly": "📢 Please Note: These classes are for women only."
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Everything you need to know about our learning format",
+    "learningFormat": {
+      "title": "🖥️ Learning Format",
+      "platform": "Platform",
+      "platformValue": "Online via Zoom",
+      "type": "Type",
+      "typeValue": "Interactive Live Sessions",
+      "startDate": "Start Date",
+      "startDateValue": "March 23, 2026",
+      "schedule": "Schedule",
+      "scheduleValue": "Every Monday",
+      "duration": "Session Duration",
+      "durationValue": "100 minutes per class",
+      "classSize": "Class Size",
+      "classSizeValue": "Limited to 30 students per class"
+    },
+    "access": {
+      "title": "Access & Recordings",
+      "noRecordings": "Important: Class recordings will not be shared. We encourage all students to attend the live sessions in person to gain the full benefit of the lessons.",
+      "zoomLink": "Upon payment confirmation, you will receive a dedicated Zoom link via email. This link will remain valid for the entire duration of your course."
+    },
+    "language": {
+      "title": "Language of Instruction",
+      "description": "You can learn and understand the lessons regardless of which language you speak. Since Quranic learning is primarily based on listening and repeating (imitation), the teaching method is clear and easy to follow for everyone.",
+      "languages": "To support your learning, the teacher speaks Uyghur/Uzbek, Turkish, and English."
+    }
+  },
+  "schedule": {
+    "title": "Class Schedule",
+    "subtitle": "Find your local class times",
+    "timeZoneReminder": {
+      "title": "🕒 Important: Time Zone Reminder",
+      "description": "All class times are listed in Eastern Daylight Time (EDT). If you are joining from a different country or region, please ensure you convert the scheduled time to your local time zone before registering. It is the student's responsibility to confirm the correct local start time to ensure you can attend the live sessions."
+    },
+    "localTimes": {
+      "title": "🌍 Local Class Times (By Level)",
+      "regions": [
+        {
+          "name": "USA & Canada (NY, Toronto)",
+          "advanced": "8:00 AM",
+          "intermediate": "10:00 AM",
+          "beginner": "12:00 PM"
+        },
+        {
+          "name": "UK, Ireland, Morocco",
+          "advanced": "12:00 PM",
+          "intermediate": "2:00 PM",
+          "beginner": "4:00 PM"
+        },
+        {
+          "name": "Europe (Germany, France, Sweden, Norway)",
+          "advanced": "1:00 PM",
+          "intermediate": "3:00 PM",
+          "beginner": "5:00 PM"
+        },
+        {
+          "name": "Turkey, Saudi Arabia, Egypt, Qatar",
+          "advanced": "3:00 PM",
+          "intermediate": "5:00 PM",
+          "beginner": "7:00 PM"
+        },
+        {
+          "name": "Uzbekistan, Tajikistan, Pakistan",
+          "advanced": "5:00 PM",
+          "intermediate": "7:00 PM",
+          "beginner": "9:00 PM"
+        },
+        {
+          "name": "Kyrgyzstan",
+          "advanced": "6:00 PM",
+          "intermediate": "8:00 PM",
+          "beginner": "10:00 PM"
+        },
+        {
+          "name": "India",
+          "advanced": "5:30 PM",
+          "intermediate": "7:30 PM",
+          "beginner": "9:30 PM"
+        },
+        {
+          "name": "Malaysia, Singapore, Indonesia (West)",
+          "advanced": "8:00 PM",
+          "intermediate": "10:00 PM",
+          "beginner": "12:00 AM (Next Day)"
+        },
+        {
+          "name": "Japan, South Korea",
+          "advanced": "9:00 PM",
+          "intermediate": "11:00 PM",
+          "beginner": "1:00 AM (Next Day)"
+        },
+        {
+          "name": "Australia (Sydney, Melbourne)",
+          "advanced": "11:00 PM",
+          "intermediate": "1:00 AM",
+          "beginner": "3:00 AM (Next Day)"
+        }
+      ],
+      "note": "Don't see your country?",
+      "noteDescription": "If your country is not listed above, don't worry—you can still join our classes! Simply use an online time converter to find the correct start time for your city based on New York (EDT) time."
+    }
   },
   "features": {
     "title": "Why Choose Saqia Madrasa?",
@@ -51,6 +159,62 @@
         "description": "Earn recognized certificates upon completing each course level."
       }
     ]
+  },
+  "courses": {
+    "title": "Our Courses",
+    "subtitle": "Structured learning paths designed to guide you from beginner to advanced levels",
+    "enrollmentNote": "Note: Once a class reaches its 30-student capacity, registration will be closed for that session. Early enrollment is highly recommended.",
+    "items": [
+      {
+        "level": "Beginner",
+        "name": "Literacy & Alifba",
+        "curriculum": "Designed for students starting from the basics. Complete the 6-part Quranic Literacy series in 12 weeks.",
+        "goal": "Master the basics of reading while building a strong foundation in Tajweed rules.",
+        "time": "12:00 PM EST",
+        "fee": "$120",
+        "duration": "Full 12-week term",
+        "icon": "📖",
+        "color": "emerald"
+      },
+      {
+        "level": "Intermediate",
+        "name": "Juz Amma",
+        "curriculum": "Designed for post-literacy students. Complete Juz Amma in 12 weeks.",
+        "goal": "Focus on fluency and comprehensive Tajweed rules to refine your recitation.",
+        "time": "10:00 AM EST",
+        "fee": "$120",
+        "duration": "Full 12-week term",
+        "icon": "📚",
+        "color": "blue"
+      },
+      {
+        "level": "Advanced",
+        "name": "30 Juz Khatm Program",
+        "curriculum": "Designed for students who can read the Quran fluently. Complete 1 Juz every 4 weeks.",
+        "goal": "Complete the recitation of all 30 Juz with improved accuracy, fluency, and proper Tajweed.",
+        "time": "08:00 AM EST",
+        "fee": "$40",
+        "duration": "per month",
+        "icon": "🕌",
+        "color": "amber",
+        "schedule": {
+          "title": "Monthly Schedule for 30 Juz Khatm",
+          "items": [
+            "Juz 1: Starts March 23",
+            "Juz 2: Starts April 20",
+            "Juz 3: Starts May 18"
+          ]
+        }
+      }
+    ],
+    "labels": {
+      "curriculum": "Curriculum",
+      "goal": "Learning Goal",
+      "schedule": "Schedule",
+      "fee": "Fee",
+      "capacity": "Class Capacity",
+      "capacityValue": "30 students"
+    }
   },
   "pricing": {
     "title": "Simple, Transparent Pricing",
@@ -100,26 +264,86 @@
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Everything you need to know about learning with Saqia Madrasa.",
-    "items": [
+    "categories": [
       {
-        "question": "How does online Quran learning work?",
-        "answer": "Our platform connects you with certified teachers via live video sessions. You can schedule classes at your convenience and learn at your own pace with personalized attention."
+        "title": "General Requirements & Eligibility",
+        "icon": "👥",
+        "questions": [
+          {
+            "question": "Is this course only for women?",
+            "answer": "Yes, all programs at Saqia Madrasa are exclusively for women and are taught by Hayrunnisa Yengilmes."
+          },
+          {
+            "question": "Can children join these classes?",
+            "answer": "These classes are primarily designed for adult women. However, young girls may join if they are mature enough to follow the lesson alongside adult students. Please note that these classes are strictly for females only; boys are not permitted to enroll regardless of age."
+          },
+          {
+            "question": "In what language will the classes be conducted?",
+            "answer": "The teacher is multilingual and can provide instructions in Uyghur/Uzbek, Turkish, and English. Even if you do not speak these languages, you can still participate effectively. Since Quranic learning is primarily based on listening and repeating after the teacher, language will not be a significant barrier."
+          },
+          {
+            "question": "What if I live in a different time zone?",
+            "answer": "All class times are listed in Eastern Standard Time (EST). Please make sure to convert the time to your local time zone before registering to ensure you can attend the live sessions."
+          }
+        ]
       },
       {
-        "question": "Do I need any prior knowledge to start?",
-        "answer": "Not at all! We welcome complete beginners. Our curriculum starts from the basics of Arabic letters and gradually progresses to fluent Quran recitation."
+        "title": "Registration & Refund Policy",
+        "icon": "📝",
+        "questions": [
+          {
+            "question": "Is the tuition fee refundable?",
+            "answer": "Tuition fees are generally non-refundable once the course has started."
+          },
+          {
+            "question": "What if the class I want to join is already full?",
+            "answer": "Each class is strictly limited to 30 students to ensure quality. If a class is full, you can join our Waiting List to receive priority notification and a chance to pre-register for the next session."
+          },
+          {
+            "question": "Can I join the Advanced Class at any time?",
+            "answer": "Yes. Since the Advanced Class (30 Juz Khatm) moves through one Juz every 4 weeks, you can join at the start of any new Juz/month, provided there is an available spot."
+          }
+        ]
       },
       {
-        "question": "What is Tajweed and why is it important?",
-        "answer": "Tajweed is the set of rules governing the proper pronunciation of the Quran. It ensures the Quran is recited as it was revealed, preserving its beauty and meaning."
+        "title": "Attendance & Technical Details",
+        "icon": "💻",
+        "questions": [
+          {
+            "question": "How do I get the Zoom link for the lessons?",
+            "answer": "After your payment is confirmed, you will automatically receive an email with your dedicated Zoom link."
+          },
+          {
+            "question": "Do I need a new link for every class?",
+            "answer": "No. The link you receive is a recurring link. You will use the same link for every Monday session throughout your entire 12-week or monthly term."
+          },
+          {
+            "question": "What is the primary platform for the classes?",
+            "answer": "All lessons are conducted live via Zoom. We recommend having a stable internet connection and a quiet space to get the most out of your Quranic journey."
+          },
+          {
+            "question": "Will I receive recordings if I miss a class?",
+            "answer": "No, we do not provide class recordings. To gain the full spiritual and educational benefit, we encourage all students to attend the interactive live sessions."
+          }
+        ]
       },
       {
-        "question": "Can I cancel or change my subscription?",
-        "answer": "Yes, you can cancel or modify your subscription at any time. Changes take effect at the start of your next billing cycle."
-      },
-      {
-        "question": "Are classes available for children?",
-        "answer": "Absolutely! We have specialized programs for children aged 5 and up, with teachers trained in engaging young learners through interactive methods."
+        "title": "Future Planning & Contact",
+        "icon": "📅",
+        "questions": [
+          {
+            "question": "Will the same classes be offered again after the 3-month term ends?",
+            "answer": "Yes. Our 12-week programs (Beginner and Intermediate) are designed to repeat. Once a term concludes, a new 3-month term for the same levels will begin."
+          },
+          {
+            "question": "Can returning students retake the same 3-month course for review?",
+            "answer": "Yes. Students who have completed a 3-month term and wish to retake the same level for review and further practice are welcome to join. You will simply need to register again and pay the tuition fee for the new term."
+          },
+          {
+            "question": "How can I contact the teacher if I have a question?",
+            "answer": "If you have any questions or need to speak with the teacher, you can leave a message through the Contact Form on this website or send us an email. We will get back to you as soon as possible."
+          }
+        ]
       }
     ]
   },

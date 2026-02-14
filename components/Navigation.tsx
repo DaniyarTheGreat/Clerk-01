@@ -50,6 +50,9 @@ export default function Navigation() {
           <a href="#features" className="text-sm text-gray-600 hover:text-emerald-700 transition">
             {t.nav.features}
           </a>
+          <a href="#courses" className="text-sm text-gray-600 hover:text-emerald-700 transition">
+            {t.nav.courses}
+          </a>
           <Link href="/pricing" className="text-sm text-gray-600 hover:text-emerald-700 transition">
             {t.nav.pricing}
           </Link>
