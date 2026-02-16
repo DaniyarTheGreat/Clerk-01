@@ -116,8 +116,8 @@ export default function SuccessClient() {
 
   if (isVerifying) {
     return (
-      <div className="bg-white font-sans min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="font-sans min-h-screen flex items-center justify-center">
+        <div className="text-center bg-white/70 backdrop-blur-md rounded-xl border border-white/30 shadow-xl px-8 py-12">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto mb-4"></div>
           <p className="text-gray-600">{t.checkout?.verifying || 'Verifying your payment...'}</p>
         </div>
@@ -127,9 +127,9 @@ export default function SuccessClient() {
 
   if (!isValid) {
     return (
-      <div className="bg-white font-sans min-h-screen flex items-center justify-center">
+      <div className="font-sans min-h-screen flex items-center justify-center">
         <div className="max-w-md mx-auto px-6 text-center">
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-6">
+          <div className="bg-red-50/80 backdrop-blur-md border border-red-200/80 rounded-xl p-6 shadow-xl">
             <svg className="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -149,9 +149,9 @@ export default function SuccessClient() {
   }
 
   return (
-    <div className="bg-white font-sans min-h-screen flex items-center justify-center">
+    <div className="font-sans min-h-screen flex items-center justify-center">
       <div className="max-w-2xl mx-auto px-6 py-12">
-        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center">
+        <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-xl p-8 text-center shadow-xl">
           {/* Success Icon */}
           <div className="mb-6">
             <div className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center mx-auto">
@@ -172,7 +172,7 @@ export default function SuccessClient() {
 
           {/* Payment Details */}
           {sessionData && (
-            <div className="bg-white rounded-lg p-6 mb-6 text-left">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 mb-6 text-left border border-white/50">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 {t.checkout?.paymentDetails || 'Payment Details'}
               </h3>

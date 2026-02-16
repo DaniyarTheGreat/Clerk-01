@@ -1,0 +1,475 @@
+{
+  "nav": {
+    "features": "Xususiyatlar",
+    "courses": "Kurslar",
+    "pricing": "Narxlar",
+    "cancel": "Bekor qilish",
+    "faq": "Savol-javob",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "signIn": "Kirish",
+    "getStarted": "Boshlash"
+  },
+  "hero": {
+    "subtitle": "Quron yo'lingizni Hayrunnisa Yengilmes bilan boshlang",
+    "title": "Quron yo'lingizni boshlang",
+    "titleHighlight": "Hayrunnisa Yengilmes",
+    "description": "Saqia Madrasa 2026 yil Quron o'qitish dasturlarining ochilishini e'lon qilishdan mamnun.",
+    "ctaPrimary": "O'rganishni boshlash",
+    "ctaSecondary": "Kurslarni ko'rish"
+  },
+  "notice": {
+    "womenOnly": "📢 E'tibor: Ushbu darslar faqat ayollar uchun."
+  },
+  "howItWorks": {
+    "title": "Qanday ishlaydi",
+    "subtitle": "O'quv formatimiz haqida bilishingiz kerak bo'lgan hamma narsa",
+    "learningFormat": {
+      "title": "🖥️ O'quv formati",
+      "platform": "Platforma",
+      "platformValue": "Zoom orqali onlayn",
+      "type": "Turi",
+      "typeValue": "Interaktiv jonli darslar",
+      "startDate": "Boshlanish sanasi",
+      "startDateValue": "2026 yil 23 mart",
+      "schedule": "Jadval",
+      "scheduleValue": "Har dushanba",
+      "duration": "Dars davomiyligi",
+      "durationValue": "Har dars uchun 100 daqiqa",
+      "classSize": "Sinf hajmi",
+      "classSizeValue": "Har sinfda 30 talabagacha"
+    },
+    "access": {
+      "title": "Kirish va yozuvlar",
+      "noRecordings": "Muhim: Dars yozuvlari taqdim etilmaydi. Barcha talabalar darslardan to'liq foyda olish uchun jonli darslarda shaxsan qatnashishlari tavsiya etiladi.",
+      "zoomLink": "To'lov tasdiqlangach, sizga elektron pochta orqali maxsus Zoom havolasi yuboriladi. Ushbu havola butun kurs davri uchun amal qiladi."
+    },
+    "language": {
+      "title": "O'qitish tili",
+      "description": "Qaysi tilda gapirsangiz ham darslarni o'rganishingiz va tushunishingiz mumkin. Quron o'rganish asosan tinglash va takrorlash (taqlid) asosida bo'lgani uchun, o'qitish usuli hamma uchun aniq va oson.",
+      "languages": "O'rganishingizni qo'llab-quvvatlash uchun o'qituvchi uyg'ur/o'zbek, turk va ingliz tillarida so'zlashadi."
+    }
+  },
+  "schedule": {
+    "title": "Dars jadvali",
+    "subtitle": "Mahalliy dars vaqtlaringizni toping",
+    "timeZoneReminder": {
+      "title": "🕒 Muhim: Vaqt mintaqasi eslatmasi",
+      "description": "Barcha dars vaqtlari Sharqiy kunduzgi vaqt (EDT) da ko'rsatilgan. Boshqa mamlakat yoki mintaqadan qo'shilsangiz, ro'yxatdan o'tishdan oldin rejalashtirilgan vaqtni mahalliy vaqt mintaqangizga o'tkazishingizni ta'minlang. Jonli darslarda qatnashishingiz uchun to'g'ri mahalliy boshlanish vaqtini tasdiqlash talaba zimmasida."
+    },
+    "localTimes": {
+      "title": "🌍 Mahalliy dars vaqtlari (daraja bo'yicha)",
+      "regions": [
+        {
+          "name": "USA & Canada (NY, Toronto)",
+          "advanced": "8:00 AM",
+          "intermediate": "10:00 AM",
+          "beginner": "12:00 PM"
+        },
+        {
+          "name": "UK, Ireland, Morocco",
+          "advanced": "12:00 PM",
+          "intermediate": "2:00 PM",
+          "beginner": "4:00 PM"
+        },
+        {
+          "name": "Europe (Germany, France, Sweden, Norway)",
+          "advanced": "1:00 PM",
+          "intermediate": "3:00 PM",
+          "beginner": "5:00 PM"
+        },
+        {
+          "name": "Turkey, Saudi Arabia, Egypt, Qatar",
+          "advanced": "3:00 PM",
+          "intermediate": "5:00 PM",
+          "beginner": "7:00 PM"
+        },
+        {
+          "name": "Uzbekistan, Tajikistan, Pakistan",
+          "advanced": "5:00 PM",
+          "intermediate": "7:00 PM",
+          "beginner": "9:00 PM"
+        },
+        {
+          "name": "Kyrgyzstan",
+          "advanced": "6:00 PM",
+          "intermediate": "8:00 PM",
+          "beginner": "10:00 PM"
+        },
+        {
+          "name": "India",
+          "advanced": "5:30 PM",
+          "intermediate": "7:30 PM",
+          "beginner": "9:30 PM"
+        },
+        {
+          "name": "Malaysia, Singapore, Indonesia (West)",
+          "advanced": "8:00 PM",
+          "intermediate": "10:00 PM",
+          "beginner": "12:00 AM (Next Day)"
+        },
+        {
+          "name": "Japan, South Korea",
+          "advanced": "9:00 PM",
+          "intermediate": "11:00 PM",
+          "beginner": "1:00 AM (Next Day)"
+        },
+        {
+          "name": "Australia (Sydney, Melbourne)",
+          "advanced": "11:00 PM",
+          "intermediate": "1:00 AM",
+          "beginner": "3:00 AM (Next Day)"
+        }
+      ],
+      "note": "Mamlakatingiz ro'yxatda yo'qmi?",
+      "noteDescription": "Agar mamlakatingiz yuqorida ko'rsatilmagan bo'lsa, tashvishlanmang—siz baribir darslarimizga qo'shilishingiz mumkin! Nyu-York (EDT) vaqtiga asosan shahringiz uchun to'g'ri boshlanish vaqtini topish uchun onlayn vaqt konverteridan foydalaning."
+    }
+  },
+  "features": {
+    "title": "Nima uchun Saqia Madrasa?",
+    "subtitle": "Platformamiz an'anaviy islom ilmi bilan zamonaviy o'quv texnologiyasini birlashtiradi.",
+    "items": [
+      {
+        "icon": "🖥️",
+        "title": "O'quv formati",
+        "details": [
+          { "label": "Platforma", "value": "Zoom orqali onlayn" },
+          { "label": "Turi", "value": "Interaktiv jonli darslar" },
+          { "label": "Boshlanish sanasi", "value": "2026 yil 23 mart" },
+          { "label": "Jadval", "value": "Har dushanba" },
+          { "label": "Davomiylik", "value": "Har dars uchun 100 daqiqa" },
+          { "label": "Sinf hajmi", "value": "30 talabagacha" }
+        ]
+      },
+      {
+        "icon": "🗣️",
+        "title": "O'qitish tili",
+        "description": "Qaysi tilda gapirsangiz ham o'rganishingiz mumkin. Quron o'rganish tinglash va takrorlashga asoslangan, shuning uchun usul hamma uchun aniq.",
+        "highlight": "O'qituvchi uyg'ur/o'zbek, turk va ingliz tillarida so'zlashadi."
+      },
+      {
+        "icon": "🎓",
+        "title": "Sertifikatlangan o'qituvchilar",
+        "description": "Ijozah sertifikati va yillik o'qitish tajribasiga ega olimlardan o'rganing."
+      },
+      {
+        "icon": "🕐",
+        "title": "Moslashuvchan jadval",
+        "description": "Hayot tarzingizga mos darslarni bron qiling, barcha vaqt mintaqalarida 24/7 mavjud."
+      },
+      {
+        "icon": "📱",
+        "title": "Qayerda bo'lishingizdan qat'iy nazar o'rganing",
+        "description": "Istalgan qurilmada—kompyuter, planshet yoki telefonda darslarga kirish."
+      },
+      {
+        "icon": "📊",
+        "title": "Taraqqiyotni kuzating",
+        "description": "Batafsil hisobotlar va bosqichlar bilan o'rganish yo'lingizni kuzating."
+      }
+    ]
+  },
+  "courses": {
+    "title": "Bizning kurslar",
+    "subtitle": "Boshlang'ichdan ilg'or darajagacha sizni yo'naltiradigan tuzilgan o'quv yo'llari",
+    "enrollmentNote": "Eslatma: Sinf 30 talaba sig'imiga yetgach, o'sha sessiya uchun ro'yxatdan o'tish yopiladi. Ilgari ro'yxatdan o'tish tavsiya etiladi.",
+    "items": [
+      {
+        "level": "Boshlang'ich",
+        "name": "Savodxonlik va Alifbo",
+        "curriculum": "Asoslardan boshlovchi talabalar uchun mo'ljallangan. 12 haftada 6 qismli Quron savodxonligi seriyasini tugating.",
+        "goal": "Tajvid qoidalarida mustahkam asos yaratish bilan o'qish asoslarini o'zlashtiring.",
+        "time": "12:00 PM EST",
+        "fee": "$120",
+        "duration": "To'liq 12 haftalik muddat",
+        "icon": "📖",
+        "color": "emerald"
+      },
+      {
+        "level": "O'rta",
+        "name": "Juz Amma",
+        "curriculum": "Savodxonlikdan keyingi talabalar uchun. 12 haftada Juz Ammani tugating.",
+        "goal": "Tilovatni takomillashtirish uchun o'qish oqimliligi va Tajvid qoidalariga e'tibor qiling.",
+        "time": "10:00 AM EST",
+        "fee": "$120",
+        "duration": "To'liq 12 haftalik muddat",
+        "icon": "📚",
+        "color": "blue"
+      },
+      {
+        "level": "Ilg'or",
+        "name": "30 Juz Xatm dasturi",
+        "curriculum": "Quroni o'qiy oladigan talabalar uchun. Har 4 haftada 1 Juz tugating.",
+        "goal": "Barcha 30 Juzni aniqroq, oqimli va to'g'ri Tajvid bilan tilovat qiling.",
+        "time": "08:00 AM EST",
+        "fee": "$40",
+        "duration": "oyiga",
+        "icon": "🕌",
+        "color": "amber",
+        "schedule": {
+          "title": "30 Juz Xatm oylik jadvali",
+          "items": [
+            "Juz 1: 23 martdan",
+            "Juz 2: 20 apreldan",
+            "Juz 3: 18 maydan"
+          ]
+        }
+      }
+    ],
+    "labels": {
+      "curriculum": "O'quv rejasi",
+      "goal": "O'rganish maqsadi",
+      "schedule": "Jadval",
+      "fee": "To'lov",
+      "capacity": "Sinf sig'imi",
+      "capacityValue": "30 talaba"
+    }
+  },
+  "pricing": {
+    "title": "Oddiy, shaffof narxlar",
+    "subtitle": "O'rganish maqsadlaringizga mos rejani tanlang.",
+    "mostPopular": "ENG MASHHUR",
+    "perMonth": "/oy",
+    "addToCart": "Savatga qo'shish",
+    "labels": {
+      "chooseBatch": "Guruhni tanlang",
+      "startDate": "Boshlanish sanasi",
+      "endDate": "Tugash sanasi",
+      "duration": "Davomiylik",
+      "students": "Talabalar",
+      "spotsAvailable": "Bo'sh o'rinlar",
+      "week": "hafta",
+      "weeks": "hafta",
+      "loadingBatches": "Guruhlar yuklanmoqda..."
+    },
+    "detailFields": [
+      "startDate",
+      "endDate",
+      "duration",
+      "students",
+      "spotsAvailable"
+    ],
+    "plans": [
+      {
+        "name": "Starter",
+        "description": "Boshlang'ichlar uchun ideal",
+        "price": 29,
+        "features": []
+      },
+      {
+        "name": "Professional",
+        "description": "Eng mashhur tanlov",
+        "price": 59,
+        "features": []
+      },
+      {
+        "name": "Scholar",
+        "description": "Ilg'or talabalar uchun",
+        "price": 99,
+        "features": []
+      }
+    ]
+  },
+  "faq": {
+    "title": "Tez-tez so'raladigan savollar",
+    "subtitle": "Saqia Madrasa bilan o'rganish haqida bilishingiz kerak bo'lgan hamma narsa.",
+    "categories": [
+      {
+        "title": "Umumiy talabalar va qobiliyat",
+        "icon": "👥",
+        "questions": [
+          {
+            "question": "Bu kurs faqat ayollar uchunmi?",
+            "answer": "Ha, Saqia Madrasadagi barcha dasturlar faqat ayollar uchun va Hayrunnisa Yengilmes tomonidan o'qitiladi."
+          },
+          {
+            "question": "Bolalar bu darslarga qo'shilishlari mumkinmi?",
+            "answer": "Ushbu darslar asosan kattalar ayollar uchun mo'ljallangan. Biroq, kattalar talabalar bilan birga darsga yetishadigan qizlar ham qo'shilishi mumkin. Ushbu darslar faqat ayollar uchun; o'g'il bolalar yoshidan qat'iy nazar qabul qilinmaydi."
+          },
+          {
+            "question": "Darslar qaysi tilda olib boriladi?",
+            "answer": "O'qituvchi ko'p tilli va uyg'ur/o'zbek, turk va ingliz tillarida ko'rsatma bera oladi. Bu tillarni bilmasangiz ham samarali qatnashishingiz mumkin. Quron o'rganish asosan o'qituvchidan keyin tinglash va takrorlashga asoslangan, shuning uchun til jiddiy to'siq bo'lmaydi."
+          },
+          {
+            "question": "Boshqa vaqt mintaqasida yashasam nima qilish kerak?",
+            "answer": "Barcha dars vaqtlari Sharqiy standart vaqt (EST) da ko'rsatilgan. Jonli darslarda qatnashishingiz uchun ro'yxatdan o'tishdan oldin vaqtni mahalliy vaqt mintaqangizga o'tkazishingizni ta'minlang."
+          }
+        ]
+      },
+      {
+        "title": "Ro'yxatdan o'tish va qaytarish siyosati",
+        "icon": "📝",
+        "questions": [
+          {
+            "question": "O'quv to'lovi qaytariladimi?",
+            "answer": "Kurs boshlangandan keyin o'quv to'lovlari odatda qaytarilmaydi."
+          },
+          {
+            "question": "Qo'shilmoqchi bo'lgan sinfim allaqachon to'ldimi?",
+            "answer": "Sifatni ta'minlash uchun har bir sinf 30 talabagacha cheklangan. Sinf to'lsa, keyingi sessiya uchun ustunlik bildirishnoma va oldindan ro'yxatdan o'tish imkoniyati uchun kutish ro'yxatimizga qo'shilishingiz mumkin."
+          },
+          {
+            "question": "Ilg'or sinfga istalgan vaqtda qo'shilish mumkinmi?",
+            "answer": "Ha. Ilg'or sinf (30 Juz Xatm) har 4 haftada 1 Juzdan o'tgani uchun, bo'sh o'rin bo'lsa, har qanday yangi Juz/oy boshida qo'shilishingiz mumkin."
+          }
+        ]
+      },
+      {
+        "title": "Qatnashish va texnik tafsilotlar",
+        "icon": "💻",
+        "questions": [
+          {
+            "question": "Darslar uchun Zoom havolasini qanday olaman?",
+            "answer": "To'lovingiz tasdiqlangach, sizga maxsus Zoom havolasi bilan elektron pochta avtomatik yuboriladi."
+          },
+          {
+            "question": "Har dars uchun yangi havola kerakmi?",
+            "answer": "Yo'q. Siz olgan havola takroriy. Butun 12 haftalik yoki oylik muddat davomida har dushanba sessiyasida xuddi shu havoladan foydalanasiz."
+          },
+          {
+            "question": "Darslar uchun asosiy platforma qaysi?",
+            "answer": "Barcha darslar Zoom orqali jonli olib boriladi. Quron yo'lingizdan to'liq foyda olish uchun barqaror internet va jim joy tavsiya etiladi."
+          },
+          {
+            "question": "Darsni qoldirsam yozuvlar beriladimi?",
+            "answer": "Yo'q, dars yozuvlarini taqdim etmaymiz. Ruhiy va ta'limiy foyda olish uchun barcha talabalarga interaktiv jonli darslarda qatnashish tavsiya etiladi."
+          }
+        ]
+      },
+      {
+        "title": "Kelajak rejalari va aloqa",
+        "icon": "📅",
+        "questions": [
+          {
+            "question": "3 oylik muddat tugagach, xuddi shu darslar yana taklif etiladimi?",
+            "answer": "Ha. 12 haftalik dasturlarimiz (Boshlang'ich va O'rta) takrorlash uchun mo'ljallangan. Muddat tugagach, shu darajalar uchun yangi 3 oylik muddat boshlanadi."
+          },
+          {
+            "question": "Qaytgan talabalar tekshiruv uchun xuddi shu 3 oylik kursni qayta olishlari mumkinmi?",
+            "answer": "Ha. 3 oylik muddatni tugatgan va tekshiruv va qo'shimcha mashq uchun shu darajani qayta o'zlashtirmoqchi bo'lgan talabalar qo'shilishlari mumkin. Yangi muddat uchun qayta ro'yxatdan o'tishingiz va o'quv to'lovini to'lashingiz kifoya."
+          },
+          {
+            "question": "Savolim bo'lsa o'qituvchi bilan qanday bog'lanish mumkin?",
+            "answer": "Savollaringiz bo'lsa yoki o'qituvchi bilan gaplashmoqchi bo'lsangiz, ushbu saytdagi Aloqa formasida xabar qoldirishingiz yoki bizga elektron pochta yuborishingiz mumkin. Imkon qadar tezroq javob beramiz."
+          }
+        ]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Quron yo'lingizni bugun boshlang",
+    "subtitle": "Dunyoning minglab talabalari bilan Quronga aloqangizni chuqurlashtiring.",
+    "button": "Boshlash"
+  },
+  "footer": {
+    "description": "Zamonaviy texnologiya va an'anaviy il orqali musulmonlarni Quronga ulashga yordam beramiz.",
+    "product": {
+      "title": "Mahsulot",
+      "links": {
+        "features": "Xususiyatlar",
+        "pricing": "Narxlar",
+        "courses": "Kurslar",
+        "teachers": "O'qituvchilar"
+      }
+    },
+    "company": {
+      "title": "Kompaniya",
+      "links": {
+        "about": "Biz haqimizda",
+        "careers": "Karyera",
+        "blog": "Blog",
+        "press": "Matbuot"
+      }
+    },
+    "support": {
+      "title": "Yordam",
+      "links": {
+        "help": "Yordam markazi",
+        "contact": "Aloqa",
+        "privacy": "Maxfiylik siyosati",
+        "terms": "Xizmat shartlari"
+      }
+    },
+    "copyright": "© 2025 Saqia Madrasa. Barcha huquqlar himoyalangan."
+  },
+  "language": {
+    "select": "Tilni tanlang",
+    "apply": "Qo'llash",
+    "cancel": "Bekor qilish",
+    "options": {
+      "en": "Inglizcha",
+      "tr": "Turkcha",
+      "uz": "O'zbekcha",
+      "ru": "Ruscha",
+      "ar": "Arabcha"
+    }
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savatingiz bo'sh",
+    "emptyDescription": "Xaridni davom ettirish uchun mahsulotlar qo'shing.",
+    "browseProducts": "Mahsulotlarni ko'rish",
+    "remove": "Olib tashlash",
+    "total": "Jami",
+    "checkout": "To'lovga o'tish",
+    "signInRequired": "Kirish talab qilinadi",
+    "signInDescription": "Savatingizni ko'rish uchun tizimga kiring.",
+    "signIn": "Kirish",
+    "signInToCheckout": "To'lovga o'tish uchun tizimga kiring.",
+    "signInToCheckoutButton": "To'lov uchun kirish"
+  },
+  "checkout": {
+    "verifying": "To'lovingiz tekshirilmoqda...",
+    "verificationFailed": "Tekshiruv muvaffaqiyatsiz",
+    "invalidSession": "Noto'g'ri yoki to'liq bo'lmagan to'lov sessiyasi.",
+    "redirecting": "Sizni qaytaramiz...",
+    "successTitle": "To'lov muvaffaqiyatli!",
+    "successMessage": "Xaridingiz uchun rahmat. To'lovingiz muvaffaqiyatli bajarildi.",
+    "paymentDetails": "To'lov tafsilotlari",
+    "email": "Elektron pochta",
+    "amount": "Summa",
+    "backToHome": "Bosh sahifaga",
+    "viewMorePlans": "Boshqa rejalar",
+    "cancelTitle": "To'lov bekor qilindi",
+    "cancelMessage": "To'lovingiz bekor qilindi. Hisobingizdan pul yechilmadi.",
+    "cancelDescription": "To'lov paytida muammo bo'lsa, qayta urinib ko'ring yoki qo'llab-quvvatlash bilan bog'laning.",
+    "backToCart": "Savatga qaytish",
+    "viewPlans": "Rejalarni ko'rish"
+  },
+  "contactForm": {
+    "title": "Biz bilan bog'laning",
+    "subtitle": "Savol yoki fikr-mulohazangiz bormi? Sizdan eshitishni xohlaymiz.",
+    "emailLabel": "Elektron pochta",
+    "emailPlaceholder": "your.email@example.com",
+    "categoryLabel": "Toifasi",
+    "categoryPlaceholder": "Toifani tanlang",
+    "categories": {
+      "bug": "Xato",
+      "feedback": "Fikr-mulohaza",
+      "general": "Umumiy",
+      "cancelOrder": "Buyurtmani bekor qilish",
+      "other": "Boshqa"
+    },
+    "messageLabel": "Xabar",
+    "messagePlaceholder": "Xabaringizni shu yerga yozing...",
+    "submitButton": "Yuborish",
+    "submitting": "Yuborilmoqda...",
+    "successMessage": "Rahmat! Xabaringiz muvaffaqiyatli yuborildi.",
+    "validationError": "Barcha maydonlarni to'ldiring"
+  },
+  "cancel": {
+    "title": "Mening buyurtmalarim",
+    "subtitle": "Kurs buyurtmalaringizni ko'ring va boshqaring",
+    "loading": "Buyurtmalaringiz yuklanmoqda...",
+    "error": "Buyurtmalarni yuklashda xato",
+    "noOrders": "Hali darslarimizga yozilmagansiz",
+    "noOrdersDescription": "Kurslarimizni ko'rib chiqing va o'zingizga mos o'quv rejasini toping.",
+    "browseCourses": "Kurslarni ko'rish",
+    "classType": "Sinf turi",
+    "startDate": "Boshlanish sanasi",
+    "endDate": "Tugash sanasi",
+    "createdAt": "Buyurtma sanasi",
+    "cancelButton": "Buyurtmani bekor qilish"
+  }
+}
+

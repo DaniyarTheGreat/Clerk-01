@@ -10,7 +10,7 @@ export default async function CancelPage() {
   }
 
   return (
-    <div className="bg-white font-sans min-h-screen">
+    <div className="font-sans min-h-screen">
       <Cancel />
     </div>
   )

@@ -127,7 +127,7 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
   if (cart.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-6 py-24">
-        <div className="text-center">
+        <div className="text-center bg-white/70 backdrop-blur-md rounded-xl border border-white/30 shadow-xl p-12 max-w-lg mx-auto">
           <svg className="w-24 h-24 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
@@ -145,7 +145,7 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
     <div className="max-w-4xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">{t.cart.title}</h1>
       
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-6">
+      <div className="bg-white/70 backdrop-blur-md rounded-xl shadow-xl border border-white/30 overflow-hidden mb-6">
         <div className="divide-y divide-gray-200">
           {cart.map((item) => (
             <div key={item.id} className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -178,14 +178,14 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
         </div>
       </div>
 
-      <div className="bg-emerald-50 rounded-xl p-6 border border-emerald-200">
+      <div className="bg-white/70 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-xl">
         <div className="flex items-center justify-between mb-6">
           <span className="text-xl font-semibold text-gray-900">{t.cart.total}</span>
           <span className="text-3xl font-bold text-emerald-600">${getTotalPrice()}</span>
         </div>
         {requireSignIn ? (
           <div className="space-y-4">
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+            <div className="bg-amber-50/80 backdrop-blur-sm border border-amber-200/80 rounded-lg p-4 mb-4">
               <p className="text-sm text-amber-800 text-center">{t.cart.signInToCheckout}</p>
             </div>
             <SignInButton>
@@ -209,7 +209,7 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
 
 export default function CartPage() {
   return (
-    <div className="bg-white font-sans min-h-screen">
+    <div className="font-sans min-h-screen">
       <SignedOut>
         <CartContent requireSignIn={true} />
       </SignedOut>

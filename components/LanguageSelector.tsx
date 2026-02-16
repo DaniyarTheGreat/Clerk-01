@@ -6,8 +6,9 @@ import { useLanguage } from '../lib/language-context'
 const languageOptions = [
   { code: 'en' as const, name: 'English', flag: '🇬🇧' },
   { code: 'tr' as const, name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'uz' as const, name: "O'zbek", flag: '🇺🇿' },
   { code: 'ru' as const, name: 'Русский', flag: '🇷🇺' },
-  { code: 'zh' as const, name: '中文', flag: '🇨🇳' },
+  { code: 'ar' as const, name: 'العربية', flag: '🇸🇦' },
 ]
 
 export default function LanguageSelector() {

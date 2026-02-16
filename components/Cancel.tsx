@@ -71,7 +71,7 @@ export default function Cancel() {
 
   if (!isLoaded) {
     return (
-      <div className="bg-white font-sans min-h-screen py-16">
+      <div className="font-sans min-h-screen py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center">
             <p className="text-gray-600">{t.cancel.loading}</p>
@@ -82,7 +82,7 @@ export default function Cancel() {
   }
 
   return (
-    <div className="bg-white font-sans min-h-screen py-16">
+    <div className="font-sans min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4 font-amiri">
@@ -99,14 +99,14 @@ export default function Cancel() {
           </div>
         ) : error ? (
           <div className="text-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+            <div className="bg-red-50/80 backdrop-blur-md border border-red-200/80 rounded-xl p-6 max-w-md mx-auto shadow-lg">
               <p className="text-red-800 font-medium">{t.cancel.error}</p>
               <p className="text-red-600 text-sm mt-2">{error}</p>
             </div>
           </div>
         ) : orders.length === 0 ? (
           <div className="text-center py-12">
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-8 max-w-lg mx-auto">
+            <div className="bg-white/70 backdrop-blur-md border border-emerald-200/80 rounded-xl p-8 max-w-lg mx-auto shadow-lg">
               <p className="text-gray-800 font-medium text-lg mb-2">{t.cancel.noOrders}</p>
               <p className="text-gray-600 mb-6">{t.cancel.noOrdersDescription}</p>
               <Link href="/pricing">
@@ -121,7 +121,7 @@ export default function Cancel() {
             {orders.map((order, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white/70 backdrop-blur-md border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">

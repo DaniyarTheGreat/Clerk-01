@@ -21,7 +21,7 @@ function FAQQuestion({ question, answer }: { question: string; answer: string })
       </button>
       {isOpen && (
         <div className="px-4 pb-4 pt-2">
-          <p className="text-gray-600 leading-relaxed">{answer}</p>
+          <p className="text-gray-700 leading-relaxed">{answer}</p>
         </div>
       )}
     </div>
@@ -71,13 +71,13 @@ export default function FAQ() {
   }
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section id="faq" className="py-24">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-3 text-shadow-readable">
             {t.faq.title}
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-700 font-medium text-shadow-readable">
             {t.faq.subtitle}
           </p>
         </div>

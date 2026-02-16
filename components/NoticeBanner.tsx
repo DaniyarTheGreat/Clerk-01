@@ -6,11 +6,11 @@ export default function NoticeBanner() {
   const { t } = useLanguage()
 
   return (
-    <section className="bg-gradient-to-r from-purple-100 via-purple-50 to-purple-100 border-y border-purple-200">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-center gap-3">
-          <span className="text-2xl">📢</span>
-          <p className="text-purple-900 font-semibold text-center">
+    <section className="py-6 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-3 bg-purple-50 border-2 border-purple-200 rounded-2xl py-4 px-6 shadow-sm">
+          <span className="text-2xl flex-shrink-0">📢</span>
+          <p className="text-purple-900 font-bold text-center text-shadow-readable">
             {t.notice.womenOnly}
           </p>
         </div>

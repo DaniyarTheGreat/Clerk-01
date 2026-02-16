@@ -11,7 +11,7 @@ import ContactForm from '../components/ContactForm'
 
 export default function Home() {
   return (
-    <div className="bg-white font-sans">
+    <div className="font-sans min-h-screen">
       <Hero />
       <NoticeBanner />
       <Features />

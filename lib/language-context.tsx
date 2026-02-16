@@ -3,18 +3,20 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import enTranslations from '../locales/en.json'
 import trTranslations from '../locales/tr.json'
+import uzTranslations from '../locales/uz.json'
 import ruTranslations from '../locales/ru.json'
-import zhTranslations from '../locales/zh.json'
+import arTranslations from '../locales/ar.json'
 
-type Language = 'en' | 'tr' | 'ru' | 'zh'
+type Language = 'en' | 'tr' | 'uz' | 'ru' | 'ar'
 
 type Translations = typeof enTranslations
 
 const translations: Record<Language, Translations> = {
   en: enTranslations,
   tr: trTranslations,
+  uz: uzTranslations,
   ru: ruTranslations,
-  zh: zhTranslations,
+  ar: arTranslations,
 }
 
 interface LanguageContextType {
@@ -31,7 +33,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Load saved language from localStorage
     const savedLanguage = localStorage.getItem('quran-academy-language') as Language
-    if (savedLanguage && ['en', 'tr', 'ru', 'zh'].includes(savedLanguage)) {
+    if (savedLanguage && ['en', 'tr', 'uz', 'ru', 'ar'].includes(savedLanguage)) {
       setLanguageState(savedLanguage)
     }
   }, [])

@@ -33,16 +33,16 @@ export default function Courses() {
   }
 
   return (
-    <section id="courses" className="py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white">
+    <section id="courses" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <div className="inline-block mb-6">
-            <h2 className="font-amiri text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-600 bg-clip-text text-transparent mb-4">
+            <h2 className="font-amiri text-4xl md:text-5xl lg:text-6xl font-bold text-shadow-readable bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-600 bg-clip-text text-transparent mb-4">
               {t.courses.title}
             </h2>
             <div className="mx-auto w-24 h-1 bg-gradient-to-r from-emerald-400 via-emerald-600 to-emerald-400 rounded-full"></div>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg font-medium text-shadow-readable">
             {t.courses.subtitle}
           </p>
         </div>

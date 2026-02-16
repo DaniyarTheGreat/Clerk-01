@@ -8,13 +8,13 @@ export default function ClassSchedule() {
   const [expandedRegion, setExpandedRegion] = useState<number | null>(null)
 
   return (
-    <section id="schedule" className="py-24 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section id="schedule" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
             {t.schedule.title}
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-700 text-lg font-medium text-shadow-readable">
             {t.schedule.subtitle}
           </p>
         </div>

@@ -10,9 +10,9 @@ export default function CancelClient() {
   const error = searchParams.get('error')
 
   return (
-    <div className="bg-white font-sans min-h-screen flex items-center justify-center">
+    <div className="font-sans min-h-screen flex items-center justify-center">
       <div className="max-w-2xl mx-auto px-6 py-12">
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center">
+        <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-xl p-8 text-center shadow-xl">
           {/* Cancel Icon */}
           <div className="mb-6">
             <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center mx-auto">
@@ -31,7 +31,7 @@ export default function CancelClient() {
           </p>
 
           {error && (
-            <p className="text-sm text-amber-700 mb-6 bg-amber-100 rounded-lg p-3">
+            <p className="text-sm text-amber-800 mb-6 bg-amber-100/90 backdrop-blur-sm rounded-lg p-3 border border-amber-200/80">
               {error}
             </p>
           )}

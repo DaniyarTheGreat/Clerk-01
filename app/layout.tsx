@@ -7,6 +7,7 @@ import { CartProvider } from '../lib/cart-context'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import LanguageSelector from '../components/LanguageSelector'
+import ScrollFadeBackground from '../components/ScrollFadeBackground'
 
 const amiri = Amiri({
   variable: '--font-amiri',
@@ -32,15 +33,18 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${amiri.variable} ${inter.variable} antialiased font-sans`}>
+        <body className={`${amiri.variable} ${inter.variable} antialiased font-sans relative`}>
+          <ScrollFadeBackground />
           <LanguageProvider>
             <CartProvider>
-              <Navigation />
-              <LanguageSelector />
-              <main className="pt-20">
-                {children}
-              </main>
-              <Footer />
+              <div className="relative z-10">
+                <Navigation />
+                <LanguageSelector />
+                <main className="pt-20">
+                  {children}
+                </main>
+                <Footer />
+              </div>
             </CartProvider>
           </LanguageProvider>
         </body>

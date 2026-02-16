@@ -57,18 +57,18 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-white to-emerald-50">
+    <section id="contact" className="py-24">
       <div className="max-w-2xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
+          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-emerald-900 mb-4 text-shadow-readable">
             {t.contactForm.title || 'Contact Us'}
           </h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
+          <p className="text-gray-700 max-w-xl mx-auto font-medium text-shadow-readable">
             {t.contactForm.subtitle || 'Have a question or feedback? We\'d love to hear from you.'}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-8 md:p-10">
+        <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-md rounded-xl shadow-xl border border-white/30 p-8 md:p-10">
           <div className="space-y-6">
             {/* Email Field */}
             <div>
@@ -97,7 +97,7 @@ export default function ContactForm() {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none bg-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none bg-white/90"
                 disabled={isSubmitting}
               >
                 <option value="">{t.contactForm.categoryPlaceholder || 'Select a category'}</option>

@@ -18,6 +18,8 @@ const indexToClassType: Record<number, string> = {
   2: 'advanced'
 }
 
+const DEFAULT_DETAIL_FIELDS = ['startDate', 'endDate', 'duration', 'students', 'spotsAvailable']
+
 export default function Pricing() {
   const { t } = useLanguage()
   const { addToCart } = useCart()
@@ -66,6 +68,23 @@ export default function Pricing() {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
   }
 
+  const getDetailValue = (key: string, batch: Batch): string => {
+    switch (key) {
+      case 'startDate':
+        return formatDate(batch.start_date)
+      case 'endDate':
+        return formatDate(batch.end_date)
+      case 'duration':
+        return `${batch.length} ${batch.length === 1 ? (t.pricing.labels?.week ?? 'week') : (t.pricing.labels?.weeks ?? 'weeks')}`
+      case 'students':
+        return `${batch.students} / ${batch.max_students}`
+      case 'spotsAvailable':
+        return String(batch.max_students - batch.students)
+      default:
+        return ''
+    }
+  }
+
   const handleNext = (planIndex: number) => {
     const classType = indexToClassType[planIndex]
     const typeBatches = batchesByType[classType] || []
@@ -84,27 +103,27 @@ export default function Pricing() {
 
   if (loading) {
     return (
-      <section id="pricing" className="py-24 bg-gradient-to-b from-emerald-50 to-white">
+      <section id="pricing" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
               {t.pricing.title}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-700 max-w-2xl mx-auto font-medium text-shadow-readable">
               {t.pricing.subtitle}
             </p>
           </div>
-          <div className="text-center text-gray-600">Loading batches...</div>
+          <div className="text-center text-gray-700 font-medium">{t.pricing.labels?.loadingBatches ?? 'Loading batches...'}</div>
         </div>
       </section>
     )
   }
 
   return (
-    <section id="pricing" className="py-24 bg-gradient-to-b from-emerald-50 to-white">
+    <section id="pricing" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
             {t.pricing.title}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -126,23 +145,22 @@ export default function Pricing() {
             return (
               <div
                 key={i}
-                className={`rounded-2xl p-8 ${
+                className={`rounded-2xl p-6 flex flex-col ${
                   isHighlighted
-                    ? 'bg-emerald-600 text-white shadow-2xl shadow-emerald-200 scale-105'
-                    : 'bg-white border border-gray-200'
+                    ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-300/50 scale-[1.02]'
+                    : 'bg-white border border-gray-200 shadow-md hover:shadow-lg transition-shadow'
                 }`}
               >
                 {isHighlighted && (
-                  <span className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">
+                  <span className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block w-fit">
                     {t.pricing.mostPopular}
                   </span>
                 )}
-                
-                {/* Batch Navigation — pill selector with optional arrows */}
+
                 {hasMultipleBatches && (
-                  <div className="mb-5">
-                    <p className={`text-xs font-medium mb-2.5 ${isHighlighted ? 'text-emerald-200' : 'text-gray-500'}`}>
-                      Choose batch
+                  <div className="mb-4">
+                    <p className={`text-xs font-medium mb-2 ${isHighlighted ? 'text-emerald-200' : 'text-gray-500'}`}>
+                      {t.pricing.labels?.chooseBatch ?? 'Choose batch'}
                     </p>
                     <div className="flex items-center gap-1.5">
                       <button
@@ -209,76 +227,36 @@ export default function Pricing() {
                   </div>
                 )}
 
-                <h3 className={`text-xl font-bold mb-1 ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
+                <h3 className={`text-lg font-semibold mb-0.5 ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
                   {plan.name}
                 </h3>
                 <p className={`text-sm mb-4 ${isHighlighted ? 'text-emerald-100' : 'text-gray-500'}`}>
                   {plan.description}
                 </p>
 
-                {/* Batch Information — animated when switching */}
                 {currentBatch && (
                   <div
                     key={`${i}-${currentIndex}`}
-                    className={`mb-4 p-4 rounded-lg animate-batch-in ${isHighlighted ? 'bg-emerald-500/30' : 'bg-gray-50'}`}
+                    className="mb-5 animate-batch-in space-y-2.5"
                   >
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Start Date:</span>
-                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
-                          {formatDate(currentBatch.start_date)}
+                    {(t.pricing.detailFields ?? DEFAULT_DETAIL_FIELDS).map((fieldKey: string) => (
+                      <div key={fieldKey} className="flex justify-between items-baseline text-sm">
+                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>
+                          {t.pricing.labels?.[fieldKey as keyof typeof t.pricing.labels] ?? fieldKey}
+                        </span>
+                        <span className={`text-sm ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
+                          {getDetailValue(fieldKey, currentBatch)}
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>End Date:</span>
-                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
-                          {formatDate(currentBatch.end_date)}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Duration:</span>
-                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
-                          {currentBatch.length} {currentBatch.length === 1 ? 'week' : 'weeks'}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Students:</span>
-                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
-                          {currentBatch.students} / {currentBatch.max_students}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>Spots Available:</span>
-                        <span className={isHighlighted ? 'text-white font-medium' : 'text-gray-900 font-medium'}>
-                          {currentBatch.max_students - currentBatch.students}
-                        </span>
-                      </div>
-                      {currentBatch.description && (
-                        <div className="pt-2 border-t border-emerald-200/30">
-                          <p className={isHighlighted ? 'text-emerald-50 text-xs' : 'text-gray-600 text-xs'}>
-                            {currentBatch.description}
-                          </p>
-                        </div>
-                      )}
-                    </div>
+                    ))}
                   </div>
                 )}
 
-                <div className="mb-6">
-                  <span className={`text-4xl font-bold ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
+                <div className="mb-6 mt-auto">
+                  <span className={`text-3xl font-bold ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
                     ${plan.price}
                   </span>
                 </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm">
-                      <svg className={`w-5 h-5 ${isHighlighted ? 'text-emerald-200' : 'text-emerald-500'}`} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span className={isHighlighted ? 'text-emerald-50' : 'text-gray-600'}>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
                 <button
                   onClick={() => addToCart({
                     id: currentBatch 
@@ -292,7 +270,7 @@ export default function Pricing() {
                     end_date: currentBatch?.end_date,
                     batch_number: currentBatch?.batch_num
                   })}
-                  className={`w-full py-3 rounded-lg font-medium transition cursor-pointer ${
+                  className={`w-full py-3 rounded-lg font-semibold transition cursor-pointer ${
                     isHighlighted
                       ? 'bg-white text-emerald-600 hover:bg-emerald-50'
                       : 'bg-emerald-600 text-white hover:bg-emerald-700'
