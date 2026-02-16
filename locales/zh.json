@@ -201,6 +201,27 @@
     "cancelDescription": "如果您在结账过程中遇到任何问题，请重试或联系我们的支持团队。",
     "backToCart": "返回购物车",
     "viewPlans": "查看计划"
+  },
+  "contactForm": {
+    "title": "联系我们",
+    "subtitle": "有问题或反馈？我们很乐意听取您的意见。",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "your.email@example.com",
+    "categoryLabel": "类别",
+    "categoryPlaceholder": "选择一个类别",
+    "categories": {
+      "bug": "错误",
+      "feedback": "反馈",
+      "general": "一般",
+      "cancelOrder": "取消订单",
+      "other": "其他"
+    },
+    "messageLabel": "消息",
+    "messagePlaceholder": "在此输入您的消息...",
+    "submitButton": "发送消息",
+    "submitting": "发送中...",
+    "successMessage": "谢谢！您的消息已成功发送。",
+    "validationError": "请填写所有字段"
   }
 }
 

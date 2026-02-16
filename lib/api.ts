@@ -339,5 +339,50 @@ export const getBatch = async (): Promise<Batch[]> => {
   }
 };
 
+export interface ContactFormRequest {
+  email: string;
+  category: string;
+  message: string;
+}
+
+export interface ContactFormResponse {
+  message: string;
+  data?: any;
+}
+
+/**
+ * Submit contact form data
+ * @param formData Contact form data including email, category, and message
+ * @returns Success message
+ */
+export const submitContactForm = async (
+  formData: ContactFormRequest
+): Promise<ContactFormResponse> => {
+  try {
+    const response = await apiClient.post<ContactFormResponse>(
+      '/form/insert',
+      {
+        email: formData.email,
+        category: formData.category,
+        message: formData.message,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to submit contact form');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
 // Export the axios instance for custom requests if needed
 export default apiClient;

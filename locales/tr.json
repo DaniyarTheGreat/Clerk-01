@@ -201,6 +201,27 @@
     "cancelDescription": "Ödeme sırasında herhangi bir sorunla karşılaştıysanız, lütfen tekrar deneyin veya destek ekibimizle iletişime geçin.",
     "backToCart": "Sepete Dön",
     "viewPlans": "Planları Görüntüle"
+  },
+  "contactForm": {
+    "title": "Bize Ulaşın",
+    "subtitle": "Bir sorunuz veya geri bildiriminiz mi var? Sizden haber almak isteriz.",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@email.com",
+    "categoryLabel": "Kategori",
+    "categoryPlaceholder": "Bir kategori seçin",
+    "categories": {
+      "bug": "Hata",
+      "feedback": "GERİ BİLDİRİM",
+      "general": "Genel",
+      "cancelOrder": "Sipariş İptal",
+      "other": "Diğer"
+    },
+    "messageLabel": "Mesaj",
+    "messagePlaceholder": "Mesajınızı buraya girin...",
+    "submitButton": "Mesaj Gönder",
+    "submitting": "Gönderiliyor...",
+    "successMessage": "Teşekkürler! Mesajınız başarıyla gönderildi.",
+    "validationError": "Lütfen tüm alanları doldurun"
   }
 }
 

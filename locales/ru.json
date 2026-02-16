@@ -201,6 +201,27 @@
     "cancelDescription": "Если у вас возникли проблемы при оформлении заказа, попробуйте еще раз или свяжитесь с нашей службой поддержки.",
     "backToCart": "Вернуться в корзину",
     "viewPlans": "Посмотреть планы"
+  },
+  "contactForm": {
+    "title": "Свяжитесь с нами",
+    "subtitle": "Есть вопрос или отзыв? Мы будем рады услышать от вас.",
+    "emailLabel": "Электронная почта",
+    "emailPlaceholder": "your.email@example.com",
+    "categoryLabel": "Категория",
+    "categoryPlaceholder": "Выберите категорию",
+    "categories": {
+      "bug": "Ошибка",
+      "feedback": "ОТЗЫВ",
+      "general": "Общее",
+      "cancelOrder": "Отменить заказ",
+      "other": "Другое"
+    },
+    "messageLabel": "Сообщение",
+    "messagePlaceholder": "Введите ваше сообщение здесь...",
+    "submitButton": "Отправить сообщение",
+    "submitting": "Отправка...",
+    "successMessage": "Спасибо! Ваше сообщение было успешно отправлено.",
+    "validationError": "Пожалуйста, заполните все поля"
   }
 }
 

@@ -425,6 +425,27 @@
     "cancelDescription": "If you encountered any issues during checkout, please try again or contact our support team.",
     "backToCart": "Back to Cart",
     "viewPlans": "View Plans"
+  },
+  "contactForm": {
+    "title": "Contact Us",
+    "subtitle": "Have a question or feedback? We'd love to hear from you.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select a category",
+    "categories": {
+      "bug": "Bug",
+      "feedback": "Feedback",
+      "general": "General",
+      "cancelOrder": "Cancel Order",
+      "other": "Other"
+    },
+    "messageLabel": "Message",
+    "messagePlaceholder": "Enter your message here...",
+    "submitButton": "Send Message",
+    "submitting": "Sending...",
+    "successMessage": "Thank you! Your message has been sent successfully.",
+    "validationError": "Please fill in all fields"
   }
 }
 

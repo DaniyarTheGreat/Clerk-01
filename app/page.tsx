@@ -7,6 +7,7 @@ import ClassSchedule from '../components/ClassSchedule'
 import Pricing from '../components/Pricing'
 import FAQ from '../components/FAQ'
 import CTA from '../components/CTA'
+import ContactForm from '../components/ContactForm'
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Pricing />
       <FAQ />
       <CTA />
+      <ContactForm />
     </div>
   )
 }
