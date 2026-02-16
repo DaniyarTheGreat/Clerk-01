@@ -384,5 +384,45 @@ export const submitContactForm = async (
   }
 };
 
+export interface StudentOrder {
+  class_type: string | null;
+  start_date: string | null;
+  end_date: string | null;
+  created_at: string;
+}
+
+export interface GetStudentOrdersResponse {
+  data: StudentOrder[];
+}
+
+/**
+ * Get student orders by email
+ * @param email User email address
+ * @returns Array of student orders
+ */
+export const getStudentOrders = async (
+  email: string
+): Promise<StudentOrder[]> => {
+  try {
+    const response = await apiClient.get<GetStudentOrdersResponse>(
+      `/student/orders?email=${encodeURIComponent(email)}`
+    );
+    return response.data.data || [];
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to fetch student orders');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
 // Export the axios instance for custom requests if needed
 export default apiClient;

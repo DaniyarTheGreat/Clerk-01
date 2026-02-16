@@ -56,6 +56,11 @@ export default function Navigation() {
           <Link href="/pricing" className="text-sm text-gray-600 hover:text-emerald-700 transition">
             {t.nav.pricing}
           </Link>
+          <SignedIn>
+            <Link href="/cancel" className="text-sm text-gray-600 hover:text-emerald-700 transition">
+              {t.nav.cancel}
+            </Link>
+          </SignedIn>
           <a href="#faq" className="text-sm text-gray-600 hover:text-emerald-700 transition">
             {t.nav.faq}
           </a>

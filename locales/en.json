@@ -3,6 +3,7 @@
     "features": "Features",
     "courses": "Courses",
     "pricing": "Pricing",
+    "cancel": "Cancel",
     "faq": "FAQ",
     "about": "About",
     "contact": "Contact",
@@ -446,6 +447,20 @@
     "submitting": "Sending...",
     "successMessage": "Thank you! Your message has been sent successfully.",
     "validationError": "Please fill in all fields"
+  },
+  "cancel": {
+    "title": "My Orders",
+    "subtitle": "View and manage your course orders",
+    "loading": "Loading your orders...",
+    "error": "Error loading orders",
+    "noOrders": "Seems like you haven't signed up for our classes yet",
+    "noOrdersDescription": "Browse our courses and find the perfect learning plan for you.",
+    "browseCourses": "Browse Courses",
+    "classType": "Class Type",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "createdAt": "Order Created",
+    "cancelButton": "Cancel Order"
   }
 }
 
