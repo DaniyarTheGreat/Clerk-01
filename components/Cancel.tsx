@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../lib/language-context'
 import { useUser } from '@clerk/nextjs'
-import { getStudentOrders, StudentOrder } from '../lib/api'
+import { getStudentOrders, cancelOrder, StudentOrder } from '../lib/api'
 import Link from 'next/link'
 
 export default function Cancel() {
@@ -12,45 +12,45 @@ export default function Cancel() {
   const [orders, setOrders] = useState<StudentOrder[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [cancellingIndex, setCancellingIndex] = useState<number | null>(null)
+  const [showCancelSuccessModal, setShowCancelSuccessModal] = useState(false)
+
+  const fetchOrders = async () => {
+    if (!isLoaded || !user?.emailAddresses?.[0]?.emailAddress) {
+      if (!user?.emailAddresses?.[0]?.emailAddress) setError('Email address not found')
+      setLoading(false)
+      return
+    }
+    try {
+      setLoading(true)
+      setError(null)
+      const data = await getStudentOrders(user.emailAddresses[0].emailAddress)
+      setOrders(data)
+    } catch (err) {
+      console.error('Failed to fetch orders:', err)
+      setError(err instanceof Error ? err.message : 'Failed to fetch orders')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      if (!isLoaded) return
-      
-      if (!user?.emailAddresses?.[0]?.emailAddress) {
-        setError('Email address not found')
-        setLoading(false)
-        return
-      }
-
-      try {
-        setLoading(true)
-        setError(null)
-        const data = await getStudentOrders(user.emailAddresses[0].emailAddress)
-        setOrders(data)
-      } catch (err) {
-        console.error('Failed to fetch orders:', err)
-        setError(err instanceof Error ? err.message : 'Failed to fetch orders')
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchOrders()
   }, [user, isLoaded])
 
+  /** Normalize to date-only YYYY-MM-DD for API */
+  const toDateOnly = (dateString: string | null): string => {
+    if (!dateString) return ''
+    const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/)
+    return match ? match[0] : dateString
+  }
+
   const formatDate = (dateString: string | null) => {
     if (!dateString) return 'N/A'
-    try {
-      const date = new Date(dateString)
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
-    } catch {
-      return dateString
-    }
+    // Extract year-month-day from date-only (2026-03-23) or ISO datetime (2026-02-11T01:29:22.728582+00:00)
+    const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/)
+    if (match) return match[0]
+    return dateString
   }
 
   const formatClassType = (classType: string | null) => {
@@ -63,10 +63,39 @@ export default function Cancel() {
     return typeMap[classType] || classType
   }
 
-  const handleCancel = (order: StudentOrder) => {
-    // Boilerplate cancel handler
-    console.log('Cancel order:', order)
-    // TODO: Implement cancel functionality
+  const closeCancelSuccessModal = () => {
+    setShowCancelSuccessModal(false)
+    fetchOrders()
+  }
+
+  const handleCancel = async (order: StudentOrder, index: number) => {
+    const email = user?.emailAddresses?.[0]?.emailAddress
+    if (!email) {
+      setError('Email address not found')
+      return
+    }
+    const batchNum = order.batch_num;
+    if (batchNum == null) {
+      setError('Order batch information is missing; cannot cancel.')
+      return
+    }
+    const startDate = toDateOnly(order.start_date)
+    const endDate = toDateOnly(order.end_date)
+    if (!startDate || !endDate) {
+      setError('Order dates are missing; cannot cancel.')
+      return
+    }
+    try {
+      setCancellingIndex(index)
+      setError(null)
+      await cancelOrder({ batch_num: batchNum, start_date: startDate, end_date: endDate, email })
+      setOrders((prev) => prev.filter((_, i) => i !== index))
+      setShowCancelSuccessModal(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to cancel order')
+    } finally {
+      setCancellingIndex(null)
+    }
   }
 
   if (!isLoaded) {
@@ -163,10 +192,11 @@ export default function Cancel() {
                 </div>
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <button
-                    onClick={() => handleCancel(order)}
-                    className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded-lg transition-colors"
+                    onClick={() => handleCancel(order, index)}
+                    disabled={cancellingIndex !== null}
+                    className="bg-red-600 hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium px-6 py-2 rounded-lg transition-colors"
                   >
-                    {t.cancel.cancelButton}
+                    {cancellingIndex === index ? t.cancel.loading : t.cancel.cancelButton}
                   </button>
                 </div>
               </div>
@@ -174,6 +204,24 @@ export default function Cancel() {
           </div>
         )}
       </div>
+
+      {showCancelSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 border border-emerald-200/80">
+            <p className="text-gray-800 text-center">
+              {t.cancel.cancelSuccessMessage}
+            </p>
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={closeCancelSuccessModal}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-6 py-2 rounded-lg transition-colors"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

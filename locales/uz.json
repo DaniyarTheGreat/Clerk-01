@@ -469,7 +469,8 @@
     "startDate": "Boshlanish sanasi",
     "endDate": "Tugash sanasi",
     "createdAt": "Buyurtma sanasi",
-    "cancelButton": "Buyurtmani bekor qilish"
+    "cancelButton": "Buyurtmani bekor qilish",
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
   }
 }
 

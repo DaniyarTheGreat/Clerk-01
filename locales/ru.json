@@ -316,6 +316,7 @@
     "startDate": "Дата начала",
     "endDate": "Дата окончания",
     "createdAt": "Дата заказа",
-    "cancelButton": "Отменить заказ"
+    "cancelButton": "Отменить заказ",
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
   }
 }

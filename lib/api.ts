@@ -389,6 +389,7 @@ export interface StudentOrder {
   start_date: string | null;
   end_date: string | null;
   created_at: string;
+  batch_num?: number; // required for cancel; ensure backend student/orders returns it
 }
 
 export interface GetStudentOrdersResponse {
@@ -417,6 +418,52 @@ export const getStudentOrders = async (
           throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
         }
         throw new Error(errorData.error || 'Failed to fetch student orders');
+      }
+      throw new Error(axiosError.message || 'Network error occurred');
+    }
+    throw error;
+  }
+};
+
+export interface CancelOrderRequest {
+  batch_num: number;
+  start_date: string;
+  end_date: string;
+  email: string;
+}
+
+export interface CancelOrderResponse {
+  message: string;
+}
+
+/**
+ * Cancel a student order (sets status to PENDING CANCEL and updates batch)
+ * @param payload batch_num, start_date, end_date, email
+ * @returns Success message
+ */
+export const cancelOrder = async (
+  payload: CancelOrderRequest
+): Promise<CancelOrderResponse> => {
+  try {
+    const response = await apiClient.post<CancelOrderResponse>(
+      '/student/cancel',
+      {
+        batch_num: payload.batch_num,
+        start_date: payload.start_date,
+        end_date: payload.end_date,
+        email: payload.email,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
+      if (axiosError.response?.data) {
+        const errorData = axiosError.response.data;
+        if (errorData.errors) {
+          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
+        }
+        throw new Error(errorData.error || 'Failed to cancel order');
       }
       throw new Error(axiosError.message || 'Network error occurred');
     }

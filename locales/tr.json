@@ -316,6 +316,7 @@
     "startDate": "Başlangıç Tarihi",
     "endDate": "Bitiş Tarihi",
     "createdAt": "Sipariş Tarihi",
-    "cancelButton": "Siparişi İptal Et"
+    "cancelButton": "Siparişi İptal Et",
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
   }
 }

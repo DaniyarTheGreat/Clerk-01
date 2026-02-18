@@ -469,7 +469,8 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "createdAt": "Order Created",
-    "cancelButton": "Cancel Order"
+    "cancelButton": "Cancel Order",
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
   }
 }
 

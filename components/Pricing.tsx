@@ -71,9 +71,9 @@ export default function Pricing() {
   const getDetailValue = (key: string, batch: Batch): string => {
     switch (key) {
       case 'startDate':
-        return formatDate(batch.start_date)
+        return batch.start_date
       case 'endDate':
-        return formatDate(batch.end_date)
+        return batch.end_date
       case 'duration':
         return `${batch.length} ${batch.length === 1 ? (t.pricing.labels?.week ?? 'week') : (t.pricing.labels?.weeks ?? 'weeks')}`
       case 'students':

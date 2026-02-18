@@ -469,7 +469,8 @@
     "startDate": "تاريخ البدء",
     "endDate": "تاريخ الانتهاء",
     "createdAt": "تاريخ الطلب",
-    "cancelButton": "إلغاء الطلب"
+    "cancelButton": "إلغاء الطلب",
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
   }
 }
 
