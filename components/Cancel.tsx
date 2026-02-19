@@ -14,6 +14,7 @@ export default function Cancel() {
   const [error, setError] = useState<string | null>(null)
   const [cancellingIndex, setCancellingIndex] = useState<number | null>(null)
   const [showCancelSuccessModal, setShowCancelSuccessModal] = useState(false)
+  const [showClassStartedModal, setShowClassStartedModal] = useState(false)
 
   const fetchOrders = async () => {
     if (!isLoaded || !user?.emailAddresses?.[0]?.emailAddress) {
@@ -85,6 +86,20 @@ export default function Cancel() {
       setError('Order dates are missing; cannot cancel.')
       return
     }
+
+    // Check if the class has already started
+    const today = new Date()
+    today.setHours(0, 0, 0, 0) // Reset time to start of day for comparison
+    
+    const classStartDate = new Date(startDate)
+    classStartDate.setHours(0, 0, 0, 0) // Reset time to start of day for comparison
+
+    if (today >= classStartDate) {
+      // Class has already started (or starts today), show error modal
+      setShowClassStartedModal(true)
+      return
+    }
+
     try {
       setCancellingIndex(index)
       setError(null)
@@ -217,6 +232,31 @@ export default function Cancel() {
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-6 py-2 rounded-lg transition-colors"
               >
                 OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showClassStartedModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 border border-red-200/80">
+            <p className="text-gray-800 text-center mb-4">
+              {t.cancel.classStartedError}
+            </p>
+            <div className="mt-6 flex flex-col items-center gap-3">
+              <Link href="/#contact" onClick={() => setShowClassStartedModal(false)}>
+                <button
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-6 py-2 rounded-lg transition-colors"
+                >
+                  {t.cancel.contactFormLink}
+                </button>
+              </Link>
+              <button
+                onClick={() => setShowClassStartedModal(false)}
+                className="text-gray-600 hover:text-gray-800 font-medium px-6 py-2 transition-colors"
+              >
+                {t.cancel.close}
               </button>
             </div>
           </div>

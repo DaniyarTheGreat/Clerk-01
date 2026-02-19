@@ -317,6 +317,9 @@
     "endDate": "Bitiş Tarihi",
     "createdAt": "Sipariş Tarihi",
     "cancelButton": "Siparişi İptal Et",
-    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that.",
+    "classStartedError": "İptal etmeye çalıştığınız ders zaten başladığı için bu siparişi iptal edemeyeceğiz. Başka sorunlarınız varsa lütfen formumuz aracılığıyla talebinizi gönderin.",
+    "contactFormLink": "İletişim Formuna Git",
+    "close": "Kapat"
   }
 }

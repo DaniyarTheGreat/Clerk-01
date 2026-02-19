@@ -470,7 +470,10 @@
     "endDate": "End Date",
     "createdAt": "Order Created",
     "cancelButton": "Cancel Order",
-    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that.",
+    "classStartedError": "Due to the class you're trying to cancel has already started, so we won't be able to cancel this order. If there's other issues please submit your request through our form.",
+    "contactFormLink": "Go to Contact Form",
+    "close": "Close"
   }
 }
 

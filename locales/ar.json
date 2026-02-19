@@ -470,7 +470,10 @@
     "endDate": "تاريخ الانتهاء",
     "createdAt": "تاريخ الطلب",
     "cancelButton": "إلغاء الطلب",
-    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that.",
+    "classStartedError": "نظراً لأن الفصل الذي تحاولين إلغاؤه قد بدأ بالفعل، لن نتمكن من إلغاء هذا الطلب. إذا كانت هناك مشاكل أخرى، يرجى تقديم طلبك من خلال نموذجنا.",
+    "contactFormLink": "الانتقال إلى نموذج الاتصال",
+    "close": "إغلاق"
   }
 }
 

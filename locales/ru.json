@@ -317,6 +317,9 @@
     "endDate": "Дата окончания",
     "createdAt": "Дата заказа",
     "cancelButton": "Отменить заказ",
-    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that.",
+    "classStartedError": "Поскольку курс, который вы пытаетесь отменить, уже начался, мы не сможем отменить этот заказ. Если у вас есть другие проблемы, пожалуйста, отправьте свой запрос через нашу форму.",
+    "contactFormLink": "Перейти к форме обратной связи",
+    "close": "Закрыть"
   }
 }

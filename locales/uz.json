@@ -470,7 +470,10 @@
     "endDate": "Tugash sanasi",
     "createdAt": "Buyurtma sanasi",
     "cancelButton": "Buyurtmani bekor qilish",
-    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that."
+    "cancelSuccessMessage": "Our team will go over your request as soon as possible, refund should be issued after that.",
+    "classStartedError": "Bekor qilmoqchi bo'lgan darsingiz allaqachon boshlanganligi sababli, biz bu buyurtmani bekor qila olmaymiz. Agar boshqa muammolar bo'lsa, iltimos, so'rovingizni formamiz orqali yuboring.",
+    "contactFormLink": "Aloqa formasiga o'tish",
+    "close": "Yopish"
   }
 }
 
