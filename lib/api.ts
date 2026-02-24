@@ -1,5 +1,12 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
+// Clerk session token getter – set by ClerkApiAuth so the backend receives Bearer token on protected routes
+let authTokenGetter: (() => Promise<string | null>) | null = null;
+
+export function setAuthTokenGetter(getter: () => Promise<string | null>) {
+  authTokenGetter = getter;
+}
+
 // Create axios instance with base configuration
 const apiClient: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -10,20 +17,33 @@ const apiClient: AxiosInstance = axios.create({
   timeout: 30000, // 30 seconds timeout
 });
 
-// Request interceptor for logging and adding auth tokens if needed
+// Request interceptor: add Clerk Bearer token for protected backend routes
 apiClient.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    // You can add auth tokens here if needed
-    // const token = getAuthToken();
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+  async (config: InternalAxiosRequestConfig) => {
+    if (authTokenGetter) {
+      try {
+        const token = await authTokenGetter();
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+      } catch (_) {
+        // No token (e.g. signed out) – request continues without Authorization
+      }
+    }
     return config;
   },
   (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
+
+// Response interceptor: on 401, redirect to sign-in (session expired or invalid)
+function handleUnauthorized() {
+  if (typeof window !== 'undefined') {
+    const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.href = `/sign-in?redirect_url=${returnUrl}`;
+  }
+}
 
 // Response interceptor for error handling
 apiClient.interceptors.response.use(
@@ -33,25 +53,25 @@ apiClient.interceptors.response.use(
   (error: AxiosError) => {
     // Handle common errors
     if (error.response) {
-      // Server responded with error status
       const status = error.response.status;
       const data = error.response.data as any;
-      
+
+      if (status === 401) {
+        handleUnauthorized();
+        return Promise.reject(error);
+      }
+
       if (status === 400) {
         console.error('Bad Request:', data);
-      } else if (status === 401) {
-        console.error('Unauthorized:', data);
       } else if (status === 500) {
         console.error('Server Error:', data);
       }
     } else if (error.request) {
-      // Request was made but no response received
       console.error('No response received:', error.request);
     } else {
-      // Something else happened
       console.error('Error:', error.message);
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -85,6 +105,14 @@ export interface CreateUserResponse {
   data: any;
 }
 
+export interface AuthMeResponse {
+  user: {
+    id: string;
+    email?: string;
+    [key: string]: unknown;
+  };
+}
+
 export interface VerifySessionResponse {
   valid: boolean;
   paid: boolean;
@@ -116,6 +144,30 @@ export interface RegisterStudentResponse {
   details?: string;
   warning?: string;
 }
+
+/**
+ * Get the current user from the backend (derived from the Clerk token).
+ * Requires the user to be signed in; send the Bearer token via the API client.
+ * @returns Backend user object (id, email, etc.)
+ */
+export const getCurrentUser = async (): Promise<AuthMeResponse['user']> => {
+  try {
+    const response = await apiClient.get<AuthMeResponse>('/auth/me');
+    return response.data.user;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<{ error?: string }>;
+      if (axiosError.response?.status === 401) {
+        throw new Error('Unauthorized');
+      }
+      if (axiosError.response?.data?.error) {
+        throw new Error(axiosError.response.data.error);
+      }
+      throw new Error(axiosError.message || 'Failed to get current user');
+    }
+    throw error;
+  }
+};
 
 /**
  * Create a Stripe checkout session
@@ -397,16 +449,17 @@ export interface GetStudentOrdersResponse {
 }
 
 /**
- * Get student orders by email
- * @param email User email address
+ * Get student orders (backend derives email from the Clerk token).
+ * @param email Optional; backend uses token email when auth is required
  * @returns Array of student orders
  */
 export const getStudentOrders = async (
-  email: string
+  email?: string
 ): Promise<StudentOrder[]> => {
   try {
+    const query = email != null ? `?email=${encodeURIComponent(email)}` : ''
     const response = await apiClient.get<GetStudentOrdersResponse>(
-      `/student/orders?email=${encodeURIComponent(email)}`
+      `/student/orders${query}`
     );
     return response.data.data || [];
   } catch (error) {

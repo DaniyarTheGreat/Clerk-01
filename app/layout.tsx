@@ -4,6 +4,7 @@ import { Amiri, Inter } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '../lib/language-context'
 import { CartProvider } from '../lib/cart-context'
+import ClerkApiAuth from '../components/ClerkApiAuth'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import LanguageSelector from '../components/LanguageSelector'
@@ -34,6 +35,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${amiri.variable} ${inter.variable} antialiased font-sans relative`}>
+          <ClerkApiAuth />
           <ScrollFadeBackground />
           <LanguageProvider>
             <CartProvider>
