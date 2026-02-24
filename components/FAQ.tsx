@@ -77,7 +77,7 @@ export default function FAQ() {
           <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-3 text-shadow-readable">
             {t.faq.title}
           </h2>
-          <p className="text-gray-700 font-medium text-shadow-readable">
+          <p className="text-gray-700 font-medium text-shadow-readable-white">
             {t.faq.subtitle}
           </p>
         </div>

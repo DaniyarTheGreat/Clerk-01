@@ -42,7 +42,7 @@ export default function Courses() {
             </h2>
             <div className="mx-auto w-24 h-1 bg-gradient-to-r from-emerald-400 via-emerald-600 to-emerald-400 rounded-full"></div>
           </div>
-          <p className="text-gray-700 max-w-2xl mx-auto text-lg font-medium text-shadow-readable">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg font-medium text-shadow-readable-white">
             {t.courses.subtitle}
           </p>
         </div>

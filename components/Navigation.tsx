@@ -18,11 +18,40 @@ export default function Navigation() {
   const { getCartCount } = useCart()
   const cartCount = getCartCount()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Avoid SSR/client hydration mismatch for cart badge (cart loads from storage on client).
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  const navLinks = (
+    <>
+      <Link href="/#features" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.features}
+      </Link>
+      <Link href="/#courses" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.courses}
+      </Link>
+      <Link href="/pricing" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.pricing}
+      </Link>
+      <SignedIn>
+        <Link href="/cancel" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+          {t.nav.cancel}
+        </Link>
+      </SignedIn>
+      <Link href="/#faq" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.faq}
+      </Link>
+      <Link href="/#features" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.about}
+      </Link>
+      <Link href="/#contact" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition" onClick={() => setMobileMenuOpen(false)}>
+        {t.nav.contact}
+      </Link>
+    </>
+  )
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-emerald-100">
@@ -46,33 +75,29 @@ export default function Navigation() {
           <span className="font-amiri text-2xl md:text-3xl font-bold text-emerald-900 tracking-tight">SAQIA MADRASA</span>
         </a>
         
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/#features" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.features}
-          </Link>
-          <Link href="/#courses" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.courses}
-          </Link>
-          <Link href="/pricing" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.pricing}
-          </Link>
-          <SignedIn>
-            <Link href="/cancel" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-              {t.nav.cancel}
-            </Link>
-          </SignedIn>
-          <Link href="/#faq" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.faq}
-          </Link>
-          <Link href="/#features" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.about}
-          </Link>
-          <Link href="/#contact" className="text-sm text-gray-700 font-medium hover:text-emerald-700 transition">
-            {t.nav.contact}
-          </Link>
+          {navLinks}
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            className="md:hidden p-2 text-gray-700 hover:text-emerald-700 transition rounded-lg"
+            onClick={() => setMobileMenuOpen((o) => !o)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
           <Link href="/cart" className="relative">
             <button className="relative p-2 text-gray-700 hover:text-emerald-700 transition cursor-pointer">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,6 +127,15 @@ export default function Navigation() {
           </SignedIn>
         </div>
       </nav>
+
+      {/* Mobile menu panel */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-emerald-100 shadow-lg">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+            {navLinks}
+          </div>
+        </div>
+      )}
     </header>
   )
 }

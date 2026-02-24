@@ -9,6 +9,7 @@ import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import LanguageSelector from '../components/LanguageSelector'
 import ScrollFadeBackground from '../components/ScrollFadeBackground'
+import CartFloatingButton from '../components/CartFloatingButton'
 
 const amiri = Amiri({
   variable: '--font-amiri',
@@ -46,6 +47,7 @@ export default function RootLayout({
                   {children}
                 </main>
                 <Footer />
+                <CartFloatingButton />
               </div>
             </CartProvider>
           </LanguageProvider>

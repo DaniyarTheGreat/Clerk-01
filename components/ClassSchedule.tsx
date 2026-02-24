@@ -14,7 +14,7 @@ export default function ClassSchedule() {
           <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
             {t.schedule.title}
           </h2>
-          <p className="text-gray-700 text-lg font-medium text-shadow-readable">
+          <p className="text-gray-700 text-lg font-medium text-shadow-readable-white">
             {t.schedule.subtitle}
           </p>
         </div>

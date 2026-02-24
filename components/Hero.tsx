@@ -14,7 +14,7 @@ export default function Hero() {
             {t.hero.title}<br />
             <span className="text-emerald-700">{t.hero.titleHighlight}</span>
           </h1>
-          <p className="text-lg text-gray-800 mb-8 max-w-xl mx-auto text-shadow-readable font-medium">
+          <p className="text-lg text-gray-800 mb-8 max-w-xl mx-auto text-shadow-readable-white font-medium">
             {t.hero.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

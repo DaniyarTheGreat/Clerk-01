@@ -109,7 +109,7 @@ export default function Pricing() {
             <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
               {t.pricing.title}
             </h2>
-            <p className="text-gray-700 max-w-2xl mx-auto font-medium text-shadow-readable">
+            <p className="text-gray-700 max-w-2xl mx-auto font-medium text-shadow-readable-white">
               {t.pricing.subtitle}
             </p>
           </div>
@@ -126,7 +126,7 @@ export default function Pricing() {
           <h2 className="font-amiri text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-shadow-readable">
             {t.pricing.title}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-700 max-w-2xl mx-auto font-medium text-shadow-readable-white">
             {t.pricing.subtitle}
           </p>
         </div>
