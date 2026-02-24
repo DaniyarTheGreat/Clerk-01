@@ -17,14 +17,25 @@ const apiClient: AxiosInstance = axios.create({
   timeout: 30000, // 30 seconds timeout
 });
 
-// Request interceptor: add Clerk Bearer token for protected backend routes
+// Extend config so response interceptor can tell if we sent a token (avoid redirect loop on "signature invalid")
+declare module 'axios' {
+  interface InternalAxiosRequestConfig {
+    _authHadToken?: boolean;
+  }
+}
+
+// Request interceptor: add Clerk session token for protected backend routes.
+// Backend expects: Authorization: Bearer <token> where token is from Clerk's getToken().
+// Backend must have CLERK_SECRET_KEY (and optionally FRONTEND_URL for authorizedParties).
 apiClient.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     if (authTokenGetter) {
       try {
-        const token = await authTokenGetter();
-        if (token) {
+        const raw = await authTokenGetter();
+        const token = typeof raw === 'string' ? raw.trim() : null;
+        if (token && token.length > 0) {
           config.headers.Authorization = `Bearer ${token}`;
+          config._authHadToken = true;
         }
       } catch (_) {
         // No token (e.g. signed out) – request continues without Authorization
@@ -37,12 +48,16 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor: on 401, redirect to sign-in (session expired or invalid)
-function handleUnauthorized() {
-  if (typeof window !== 'undefined') {
-    const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-    window.location.href = `/sign-in?redirect_url=${returnUrl}`;
+// On 401: only redirect to sign-in when we didn't send a token (user needs to sign in).
+// When we did send a token and backend returns 401 (e.g. "JWT signature invalid"), don't redirect to avoid a loop.
+function handleUnauthorized(config?: InternalAxiosRequestConfig) {
+  if (typeof window === 'undefined') return;
+  if (config?._authHadToken) {
+    // Token was sent but backend rejected it – don't redirect; let the caller show an error
+    return;
   }
+  const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
+  window.location.href = `/sign-in?redirect_url=${returnUrl}`;
 }
 
 // Response interceptor for error handling
@@ -57,7 +72,7 @@ apiClient.interceptors.response.use(
       const data = error.response.data as any;
 
       if (status === 401) {
-        handleUnauthorized();
+        handleUnauthorized(error.config as InternalAxiosRequestConfig);
         return Promise.reject(error);
       }
 
