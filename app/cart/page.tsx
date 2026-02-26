@@ -3,7 +3,8 @@
 import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs'
 import { useLanguage } from '../../lib/language-context'
 import { useCart } from '../../lib/cart-context'
-import { createCheckoutSession, checkUserExists, createUser } from '../../lib/api'
+import { createCheckoutSession, createUser } from '../../lib/api'
+import axios from 'axios'
 import Link from 'next/link'
 
 function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
@@ -14,48 +15,22 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
   const userEmail = user?.emailAddresses[0]?.emailAddress
   const userFullName = user?.fullName
 
-  async function checkUser() {
+  async function createOrSyncUserRecord(): Promise<boolean> {
     try {
-      
-      if (!userEmail) {
-        console.error('No email found for user');
-        return false;
-      }
-
-      // Check if user exists in the backend
-      const exists = await checkUserExists(userEmail);
-      
-      console.log('User exists in backend:', exists);
-      return exists;
-    } catch (error) {
-      console.error('Error checking user:', error);
-      alert(`Failed to check user: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      return false;
-    }
-  }
-
-  async function createNewUserRecord() {
-    try {
-
-      if (!userEmail) {
-        console.error('No email found for user');
-        return false;
-      }
-
-      if (!userFullName) {
-        console.error('No name found for user');
-        return false;
-      }
-
-      const userData = { email: userEmail, full_name: userFullName, phone: undefined };
-
-      const response = await createUser(userData);
-
+      // Backend derives email from Clerk token; send only optional full_name and phone
+      const response = await createUser({
+        full_name: userFullName ?? undefined,
+        phone: undefined,
+      });
       console.log('Create User Response:', response);
-      return response;
+      return !!response;
     } catch (error) {
-      console.error("Create user failed:", error);
-      alert(`Create user failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Create user failed:', error);
+      const msg = axios.isAxiosError(error) && error.response?.status === 429
+        ? (t.cart.tooManyAttempts ?? 'Too many attempts. Please try again later.')
+        : (error instanceof Error ? error.message : 'Unknown error');
+      alert(msg);
+      return false;
     }
   }
 
@@ -88,39 +63,27 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
         alert('No checkout URL received from server');
       }
     } catch (error) {
-      console.error("Checkout failed:", error);
-      alert(`Checkout failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Checkout failed:', error);
+      const msg = axios.isAxiosError(error) && error.response?.status === 429
+        ? (t.cart.tooManyAttempts ?? 'Too many attempts. Please try again later.')
+        : (error instanceof Error ? error.message : 'Unknown error');
+      alert(msg);
     }
   }
 
-  // Orchestrator function that handles the complete checkout flow
+  // Orchestrator: create/sync user (backend uses Clerk token, no email in body) then start checkout
   async function handleCheckout() {
     try {
       console.log('Starting checkout process...');
-      
-      // Step 1: Check if user exists in backend
-      const userExists = await checkUser();
-      
-      // Step 2: If user doesn't exist, create new user record
-      if (!userExists) {
-        console.log('User does not exist, creating new user record...');
-        const createResult = await createNewUserRecord();
-        
-        if (!createResult) {
-          console.error('Failed to create user record');
-          return;
-        }
-        console.log('User record created successfully');
-      } else {
-        console.log('User already exists in backend');
-      }
-      
-      // Step 3: Proceed with checkout session
+      const created = await createOrSyncUserRecord();
+      if (!created) return;
       await checkoutSession();
-      
     } catch (error) {
       console.error('Checkout process failed:', error);
-      alert(`Checkout process failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      const msg = axios.isAxiosError(error) && error.response?.status === 429
+        ? (t.cart.tooManyAttempts ?? 'Too many attempts. Please try again later.')
+        : (error instanceof Error ? error.message : 'Unknown error');
+      alert(msg);
     }
   }
 

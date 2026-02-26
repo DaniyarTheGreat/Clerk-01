@@ -416,7 +416,8 @@
     "signInDescription": "يرجى تسجيل الدخول لعرض سلة التسوق.",
     "signIn": "تسجيل الدخول",
     "signInToCheckout": "يرجى تسجيل الدخول لإتمام الشراء.",
-    "signInToCheckoutButton": "تسجيل الدخول للشراء"
+    "signInToCheckoutButton": "تسجيل الدخول للشراء",
+    "tooManyAttempts": "محاولات كثيرة. يرجى المحاولة لاحقاً."
   },
   "checkout": {
     "verifying": "جاري التحقق من الدفع...",

@@ -103,7 +103,7 @@ export default function Cancel() {
     try {
       setCancellingIndex(index)
       setError(null)
-      await cancelOrder({ batch_num: batchNum, start_date: startDate, end_date: endDate, email })
+      await cancelOrder({ batch_num: batchNum, start_date: startDate, end_date: endDate })
       setOrders((prev) => prev.filter((_, i) => i !== index))
       setShowCancelSuccessModal(true)
     } catch (err) {

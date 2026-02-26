@@ -46,7 +46,7 @@ export default function SuccessClient() {
     if (hasStartedRef.current) return
     hasStartedRef.current = true
 
-    // Verify the session with backend
+    // Verify the session with backend (Bearer token sent via api client; PII only if session belongs to user)
     const verifyPayment = async () => {
       try {
         const result = await verifySession(sessionId)

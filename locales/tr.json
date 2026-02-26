@@ -269,7 +269,8 @@
     "signInDescription": "Alışveriş sepetinizi görüntülemek için lütfen giriş yapın.",
     "signIn": "Giriş Yap",
     "signInToCheckout": "Ödemeye devam etmek için lütfen giriş yapın.",
-    "signInToCheckoutButton": "Ödeme İçin Giriş Yap"
+    "signInToCheckoutButton": "Ödeme İçin Giriş Yap",
+    "tooManyAttempts": "Çok fazla deneme. Lütfen daha sonra tekrar deneyin."
   },
   "checkout": {
     "verifying": "Ödemeniz doğrulanıyor...",

@@ -16,9 +16,21 @@ export default function SignInClient() {
     setMounted(true)
   }, [])
 
-  const redirectUrl = searchParams.get('redirect_url')
-    ? decodeURIComponent(searchParams.get('redirect_url')!)
-    : '/'
+  // Security: allow only relative, same-origin URLs to prevent open redirects
+  const rawRedirect = searchParams.get('redirect_url')
+  const redirectUrl = (() => {
+    if (!rawRedirect) return '/'
+    try {
+      const decoded = decodeURIComponent(rawRedirect)
+      // Allow only path-only URLs (must start with / and no protocol/host)
+      if (decoded.startsWith('/') && !decoded.startsWith('//') && !/^\/[^/]*:/.test(decoded)) {
+        return decoded
+      }
+      return '/'
+    } catch {
+      return '/'
+    }
+  })()
 
   if (!mounted) {
     return (

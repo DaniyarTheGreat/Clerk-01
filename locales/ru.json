@@ -269,7 +269,8 @@
     "signInDescription": "Войдите, чтобы просмотреть корзину.",
     "signIn": "Войти",
     "signInToCheckout": "Войдите для оформления заказа.",
-    "signInToCheckoutButton": "Войти для оплаты"
+    "signInToCheckoutButton": "Войти для оплаты",
+    "tooManyAttempts": "Слишком много попыток. Попробуйте позже."
   },
   "checkout": {
     "verifying": "Проверка оплаты...",

@@ -1,5 +1,11 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
+/** Typed error payload from API responses (avoids `as any` and misuse). */
+export interface ApiErrorData {
+  error?: string;
+  errors?: unknown[];
+}
+
 // Clerk session token getter – set by ClerkApiAuth so the backend receives Bearer token on protected routes
 let authTokenGetter: (() => Promise<string | null>) | null = null;
 
@@ -7,7 +13,9 @@ export function setAuthTokenGetter(getter: () => Promise<string | null>) {
   authTokenGetter = getter;
 }
 
-// Create axios instance with base configuration
+// Create axios instance with base configuration.
+// Security: NEXT_PUBLIC_* is exposed to the client. Backend must enforce auth (e.g. Clerk token validation),
+// strict CORS, and never rely on client-supplied secrets. Keep CLERK_SECRET_KEY and other secrets server-side only.
 const apiClient: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
@@ -69,21 +77,37 @@ apiClient.interceptors.response.use(
     // Handle common errors
     if (error.response) {
       const status = error.response.status;
-      const data = error.response.data as any;
+      const data = error.response.data as ApiErrorData;
 
       if (status === 401) {
         handleUnauthorized(error.config as InternalAxiosRequestConfig);
         return Promise.reject(error);
       }
 
-      if (status === 400) {
-        console.error('Bad Request:', data);
-      } else if (status === 500) {
-        console.error('Server Error:', data);
+      if (status === 429) {
+        const retryAfter = error.response?.headers?.['retry-after'];
+        const msg = retryAfter
+          ? `Too many attempts. Please try again after ${retryAfter} seconds.`
+          : (data?.error || 'Too many attempts. Please try again later.');
+        (error as Error).message = msg;
+        return Promise.reject(error);
       }
-    } else if (error.request) {
+
+      // In production, avoid logging full response bodies to prevent leaking sensitive data
+      if (process.env.NODE_ENV !== 'production') {
+        if (status === 400) {
+          console.error('Bad Request:', data);
+        } else if (status === 500) {
+          console.error('Server Error:', data);
+        }
+      } else {
+        if (status === 400 || status === 500) {
+          console.error(`Request failed with status ${status}`);
+        }
+      }
+    } else if (error.request && process.env.NODE_ENV !== 'production') {
       console.error('No response received:', error.request);
-    } else {
+    } else if (!error.response && !error.request && process.env.NODE_ENV !== 'production') {
       console.error('Error:', error.message);
     }
 
@@ -105,19 +129,33 @@ export interface CheckoutSessionResponse {
   url: string;
 }
 
+/** Backend returns a generic message (no user enumeration). */
 export interface CheckUserResponse {
-  exists: boolean;
+  message: string;
 }
 
+/** Request body for POST /client/create. Email must not be sent; backend derives it from Clerk token. */
 export interface CreateUserRequest {
-  email: string;
   full_name?: string;
   phone?: string;
 }
 
+/** User row as returned by backend (id, email from token, optional full_name, phone). */
+export interface UserRecord {
+  id: string;
+  email?: string;
+  full_name?: string | null;
+  phone?: string | null;
+  [key: string]: unknown;
+}
+
+/**
+ * Backend returns 201 (created) or 200 (user already exists). Both include message and data.
+ * Email is set server-side from the authenticated user only.
+ */
 export interface CreateUserResponse {
-  message: string;
-  data: any;
+  message: 'User created successfully' | 'User already exists';
+  data: UserRecord | UserRecord[];
 }
 
 export interface AuthMeResponse {
@@ -215,44 +253,32 @@ export const createCheckoutSession = async (
 };
 
 /**
- * Check if a user exists by email
+ * Call GET /client/check (e.g. for sign-in flows). Backend returns a generic message only; do not use to infer
+ * whether an email exists. Rate-limited; handle 429 (e.g. "Too many attempts. Please try again later.").
  * @param email User email address
- * @returns Boolean indicating if user exists
+ * @returns Generic message from backend (e.g. "If an account exists with this email, you can sign in.")
  */
-export const checkUserExists = async (email: string): Promise<boolean> => {
-  try {
-    const response = await apiClient.get<CheckUserResponse>(
-      `/client/check?email=${encodeURIComponent(email)}`
-    );
-    return response.data.exists;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError<{ error?: string; errors?: any[] }>;
-      if (axiosError.response?.data) {
-        const errorData = axiosError.response.data;
-        if (errorData.errors) {
-          throw new Error(`Validation errors: ${JSON.stringify(errorData.errors)}`);
-        }
-        throw new Error(errorData.error || 'Failed to check user existence');
-      }
-      throw new Error(axiosError.message || 'Network error occurred');
-    }
-    throw error;
-  }
+export const getClientCheckMessage = async (email: string): Promise<string> => {
+  const response = await apiClient.get<CheckUserResponse>(
+    `/client/check?email=${encodeURIComponent(email)}`
+  );
+  return response.data.message;
 };
 
 /**
- * Create a new user
- * @param userData User data including email, optional full_name and phone
+ * Create or sync the current user row. Requires Clerk auth; send Bearer token (api client adds it).
+ * Do not send email in body; backend sets email from the verified Clerk user.
+ * @param userData Optional full_name and phone only
  * @returns Created user data
  */
 export const createUser = async (
   userData: CreateUserRequest
 ): Promise<CreateUserResponse> => {
   try {
+    const body = { full_name: userData.full_name, phone: userData.phone };
     const response = await apiClient.post<CreateUserResponse>(
       '/client/create',
-      userData
+      body
     );
     return response.data;
   } catch (error) {
@@ -281,7 +307,7 @@ export const verifySession = async (
 ): Promise<VerifySessionResponse> => {
   try {
     const response = await apiClient.get<VerifySessionResponse>(
-      `/payments/verify-session?session_id=${sessionId}`
+      `/payments/verify-session?session_id=${encodeURIComponent(sessionId)}`
     );
     return response.data;
   } catch (error) {
@@ -406,6 +432,13 @@ export const getBatch = async (): Promise<Batch[]> => {
   }
 };
 
+/** Strip HTML/script to reduce XSS risk; backend must also escape when rendering. */
+function sanitizeForContact(value: string, maxLength: number): string {
+  const trimmed = value.trim();
+  const noHtml = trimmed.replace(/<[^>]*>/g, '').replace(/[<>"']/g, '');
+  return noHtml.slice(0, maxLength);
+}
+
 export interface ContactFormRequest {
   email: string;
   category: string;
@@ -418,21 +451,22 @@ export interface ContactFormResponse {
 }
 
 /**
- * Submit contact form data
+ * Submit contact form data. Inputs are sanitized (HTML stripped) before send; backend must escape when rendering.
  * @param formData Contact form data including email, category, and message
  * @returns Success message
  */
 export const submitContactForm = async (
   formData: ContactFormRequest
 ): Promise<ContactFormResponse> => {
+  const sanitized = {
+    email: sanitizeForContact(formData.email, 255),
+    category: sanitizeForContact(formData.category, 100),
+    message: sanitizeForContact(formData.message, 10000),
+  };
   try {
     const response = await apiClient.post<ContactFormResponse>(
       '/form/insert',
-      {
-        email: formData.email,
-        category: formData.category,
-        message: formData.message,
-      }
+      sanitized
     );
     return response.data;
   } catch (error) {
@@ -497,7 +531,8 @@ export interface CancelOrderRequest {
   batch_num: number;
   start_date: string;
   end_date: string;
-  email: string;
+  /** @deprecated Backend must determine user from auth token (e.g. Clerk); do not trust client-supplied email. */
+  email?: string;
 }
 
 export interface CancelOrderResponse {
@@ -505,8 +540,10 @@ export interface CancelOrderResponse {
 }
 
 /**
- * Cancel a student order (sets status to PENDING CANCEL and updates batch)
- * @param payload batch_num, start_date, end_date, email
+ * Cancel a student order (sets status to PENDING CANCEL and updates batch).
+ * Backend must determine the acting user from the authenticated session (Clerk token) and ignore
+ * any client-supplied email; cancel only orders belonging to that user.
+ * @param payload batch_num, start_date, end_date (email omitted; backend uses token)
  * @returns Success message
  */
 export const cancelOrder = async (
@@ -519,7 +556,8 @@ export const cancelOrder = async (
         batch_num: payload.batch_num,
         start_date: payload.start_date,
         end_date: payload.end_date,
-        email: payload.email,
+        // Do not send email: backend must derive identity from Authorization token
+        ...(payload.email != null ? { email: payload.email } : {}),
       }
     );
     return response.data;

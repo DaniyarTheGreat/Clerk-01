@@ -416,7 +416,8 @@
     "signInDescription": "Savatingizni ko'rish uchun tizimga kiring.",
     "signIn": "Kirish",
     "signInToCheckout": "To'lovga o'tish uchun tizimga kiring.",
-    "signInToCheckoutButton": "To'lov uchun kirish"
+    "signInToCheckoutButton": "To'lov uchun kirish",
+    "tooManyAttempts": "Juda ko'p urinishlar. Iltimos, keyinroq qayta urinib ko'ring."
   },
   "checkout": {
     "verifying": "To'lovingiz tekshirilmoqda...",
