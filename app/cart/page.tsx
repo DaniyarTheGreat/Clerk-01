@@ -51,7 +51,8 @@ function CartContent({ requireSignIn }: { requireSignIn: boolean }) {
       console.log('Sending items to checkout:', items);
 
       // Use axios-based API service
-      const response = await createCheckoutSession(items);
+      const primaryBatchNum = cart[0]?.batch_number;
+      const response = await createCheckoutSession(items, primaryBatchNum);
       
       console.log('Checkout session response:', response);
    

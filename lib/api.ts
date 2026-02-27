@@ -225,15 +225,17 @@ export const getCurrentUser = async (): Promise<AuthMeResponse['user']> => {
 /**
  * Create a Stripe checkout session
  * @param items Array of items with name property
+ * @param batch_num Batch number associated with this checkout (from selected batch)
  * @returns Checkout session URL
  */
 export const createCheckoutSession = async (
-  items: CheckoutItem[]
+  items: CheckoutItem[],
+  batch_num?: number
 ): Promise<CheckoutSessionResponse> => {
   try {
     const response = await apiClient.post<CheckoutSessionResponse>(
       '/payments/create-session',
-      { items }
+      { items, batch_num }
     );
     return response.data;
   } catch (error) {
@@ -406,6 +408,7 @@ export interface Batch {
   max_students: number;
   description: string | null;
   class_type: 'beginner' | 'intermediate' | 'advanced';
+  time: string;
 }
 
 /**

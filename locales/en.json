@@ -235,6 +235,7 @@
       "chooseBatch": "Choose batch",
       "startDate": "Start Date",
       "endDate": "End Date",
+      "time": "Start Time",
       "duration": "Duration",
       "students": "Students",
       "spotsAvailable": "Spots Available",

@@ -18,7 +18,7 @@ const indexToClassType: Record<number, string> = {
   2: 'advanced'
 }
 
-const DEFAULT_DETAIL_FIELDS = ['startDate', 'endDate', 'duration', 'students', 'spotsAvailable']
+const DEFAULT_DETAIL_FIELDS = ['startDate', 'endDate', 'time', 'duration', 'students', 'spotsAvailable']
 
 export default function Pricing() {
   const { t } = useLanguage()
@@ -74,6 +74,8 @@ export default function Pricing() {
         return batch.start_date
       case 'endDate':
         return batch.end_date
+      case 'time':
+        return `${batch.time} EST`
       case 'duration':
         return `${batch.length} ${batch.length === 1 ? (t.pricing.labels?.week ?? 'week') : (t.pricing.labels?.weeks ?? 'weeks')}`
       case 'students':
@@ -239,7 +241,13 @@ export default function Pricing() {
                     key={`${i}-${currentIndex}`}
                     className="mb-5 animate-batch-in space-y-2.5"
                   >
-                    {(t.pricing.detailFields ?? DEFAULT_DETAIL_FIELDS).map((fieldKey: string) => (
+                    {(() => {
+                      const baseFields = (t.pricing.detailFields ?? DEFAULT_DETAIL_FIELDS) as string[]
+                      const fields = baseFields.includes('time')
+                        ? baseFields
+                        : [...baseFields.slice(0, 2), 'time', ...baseFields.slice(2)]
+                      return fields
+                    })().map((fieldKey: string) => (
                       <div key={fieldKey} className="flex justify-between items-baseline text-sm">
                         <span className={isHighlighted ? 'text-emerald-100' : 'text-gray-600'}>
                           {t.pricing.labels?.[fieldKey as keyof typeof t.pricing.labels] ?? fieldKey}

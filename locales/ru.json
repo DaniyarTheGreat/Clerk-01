@@ -181,6 +181,7 @@
       "chooseBatch": "Выберите группу",
       "startDate": "Дата начала",
       "endDate": "Дата окончания",
+      "time": "Время начала",
       "duration": "Длительность",
       "students": "Ученицы",
       "spotsAvailable": "Свободные места",
