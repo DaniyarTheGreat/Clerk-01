@@ -532,10 +532,8 @@ export const getStudentOrders = async (
 
 export interface CancelOrderRequest {
   batch_num: number;
+  /** Class start date in YYYY-MM-DD (date-only) */
   start_date: string;
-  end_date: string;
-  /** @deprecated Backend must determine user from auth token (e.g. Clerk); do not trust client-supplied email. */
-  email?: string;
 }
 
 export interface CancelOrderResponse {
@@ -543,10 +541,10 @@ export interface CancelOrderResponse {
 }
 
 /**
- * Cancel a student order (sets status to PENDING CANCEL and updates batch).
- * Backend must determine the acting user from the authenticated session (Clerk token) and ignore
- * any client-supplied email; cancel only orders belonging to that user.
- * @param payload batch_num, start_date, end_date (email omitted; backend uses token)
+ * Request a refund for a one-time payment associated with an order.
+ * Backend determines the acting user from the authenticated session (Clerk token) and refunds
+ * only payments belonging to that user. Allowed only before the class start date.
+ * @param payload batch_num and start_date (date-only)
  * @returns Success message
  */
 export const cancelOrder = async (
@@ -554,13 +552,10 @@ export const cancelOrder = async (
 ): Promise<CancelOrderResponse> => {
   try {
     const response = await apiClient.post<CancelOrderResponse>(
-      '/student/cancel',
+      '/payments/refund',
       {
         batch_num: payload.batch_num,
         start_date: payload.start_date,
-        end_date: payload.end_date,
-        // Do not send email: backend must derive identity from Authorization token
-        ...(payload.email != null ? { email: payload.email } : {}),
       }
     );
     return response.data;

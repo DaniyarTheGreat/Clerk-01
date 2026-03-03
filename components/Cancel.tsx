@@ -81,33 +81,18 @@ export default function Cancel() {
       return
     }
     const startDate = toDateOnly(order.start_date)
-    const endDate = toDateOnly(order.end_date)
-    if (!startDate || !endDate) {
-      setError('Order dates are missing; cannot cancel.')
-      return
-    }
-
-    // Check if the class has already started
-    const today = new Date()
-    today.setHours(0, 0, 0, 0) // Reset time to start of day for comparison
-    
-    const classStartDate = new Date(startDate)
-    classStartDate.setHours(0, 0, 0, 0) // Reset time to start of day for comparison
-
-    if (today >= classStartDate) {
-      // Class has already started (or starts today), show error modal
-      setShowClassStartedModal(true)
-      return
-    }
-
     try {
       setCancellingIndex(index)
       setError(null)
-      await cancelOrder({ batch_num: batchNum, start_date: startDate, end_date: endDate })
+      await cancelOrder({ batch_num: batchNum, start_date: startDate })
       setOrders((prev) => prev.filter((_, i) => i !== index))
       setShowCancelSuccessModal(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to cancel order')
+      const message = err instanceof Error ? err.message : 'Failed to cancel order'
+      setError(message)
+      if (message.includes('Refund is not allowed on or after the class start date')) {
+        setShowClassStartedModal(true)
+      }
     } finally {
       setCancellingIndex(null)
     }
