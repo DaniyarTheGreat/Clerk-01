@@ -78,6 +78,7 @@ export default function SuccessClient() {
               email: studentEmail,
               start_date: cartItem.start_date,
               end_date: cartItem.end_date,
+              session_id: sessionId,
             })
             console.log('Register student result for batch', batchNumber, ':', registerStudentResult)
           }

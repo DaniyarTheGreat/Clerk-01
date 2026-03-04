@@ -189,6 +189,7 @@ export interface RegisterStudentRequest {
   email: string;
   start_date?: string;
   end_date?: string;
+  session_id?: string;
 }
 
 export interface RegisterStudentResponse {
@@ -377,6 +378,7 @@ export const registerStudent = async (
         email: studentData.email,
         start_date: studentData.start_date,
         end_date: studentData.end_date,
+        session_id: studentData.session_id,
       }
     );
     return response.data;
