@@ -191,9 +191,9 @@
     },
     "detailFields": ["startDate", "endDate", "duration", "students", "spotsAvailable"],
     "plans": [
-      {"name": "Starter", "description": "Yeni başlayanlar için mükemmel", "price": 29, "features": []},
-      {"name": "Professional", "description": "En popüler seçim", "price": 59, "features": []},
-      {"name": "Scholar", "description": "İleri düzey öğrenciler için", "price": 99, "features": []}
+      {"name": "Starter", "description": "Yeni başlayanlar için mükemmel", "price": 120, "features": []},
+      {"name": "Professional", "description": "En popüler seçim", "price": 120, "features": []},
+      {"name": "Advanced", "description": "İleri düzey öğrenciler için", "price": 40, "features": []}
     ]
   },
   "faq": {

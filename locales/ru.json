@@ -191,9 +191,9 @@
     },
     "detailFields": ["startDate", "endDate", "duration", "students", "spotsAvailable"],
     "plans": [
-      {"name": "Starter", "description": "Идеально для начинающих", "price": 29, "features": []},
-      {"name": "Professional", "description": "Самый популярный выбор", "price": 59, "features": []},
-      {"name": "Scholar", "description": "Для продвинутых учениц", "price": 99, "features": []}
+      {"name": "Starter", "description": "Идеально для начинающих", "price": 120, "features": []},
+      {"name": "Professional", "description": "Самый популярный выбор", "price": 120, "features": []},
+      {"name": "Advanced", "description": "Для продвинутых учениц", "price": 40, "features": []}
     ]
   },
   "faq": {

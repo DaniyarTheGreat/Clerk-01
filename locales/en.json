@@ -254,19 +254,19 @@
       {
         "name": "Starter",
         "description": "Perfect for beginners",
-        "price": 29,
+        "price": 120,
         "features": []
       },
       {
         "name": "Professional",
         "description": "Most popular choice",
-        "price": 59,
+        "price": 120,
         "features": []
       },
       {
-        "name": "Scholar",
+        "name": "Advanced",
         "description": "For adavanced students",
-        "price": 99,
+        "price": 40,
         "features": []
       }
     ]

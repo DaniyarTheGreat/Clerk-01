@@ -254,19 +254,19 @@
       {
         "name": "Starter",
         "description": "مثالي للمبتدئات",
-        "price": 29,
+        "price": 120,
         "features": []
       },
       {
         "name": "Professional",
         "description": "الخيار الأكثر شعبية",
-        "price": 59,
+        "price": 120,
         "features": []
       },
       {
-        "name": "Scholar",
+        "name": "Advanced",
         "description": "للطالبات المتقدمات",
-        "price": 99,
+        "price": 40,
         "features": []
       }
     ]

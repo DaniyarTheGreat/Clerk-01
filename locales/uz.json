@@ -254,19 +254,19 @@
       {
         "name": "Starter",
         "description": "Boshlang'ichlar uchun ideal",
-        "price": 29,
+        "price": 120,
         "features": []
       },
       {
         "name": "Professional",
         "description": "Eng mashhur tanlov",
-        "price": 59,
+        "price": 120,
         "features": []
       },
       {
-        "name": "Scholar",
+        "name": "Advanced",
         "description": "Ilg'or talabalar uchun",
-        "price": 99,
+        "price": 40,
         "features": []
       }
     ]

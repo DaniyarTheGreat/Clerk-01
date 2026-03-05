@@ -5,12 +5,6 @@ import { useLanguage } from '../lib/language-context'
 import { useCart } from '../lib/cart-context'
 import { getBatch, Batch } from '../lib/api'
 
-// Map backend class types to frontend product indices
-const classTypeToIndex: Record<string, number> = {
-  'beginner': 0,      // Starter
-  'intermediate': 1, // Professional
-  'advanced': 2      // Scholar
-}
 
 const indexToClassType: Record<number, string> = {
   0: 'beginner',
